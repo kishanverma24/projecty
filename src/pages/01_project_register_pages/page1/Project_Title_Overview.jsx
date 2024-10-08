@@ -10,17 +10,6 @@ const Project_Title_Overview = () => {
 
   const handleSave = (e) => {
     // e.preventDefault();
-    console.log(
-      "\n",
-      "Title:" + title,
-      "\n",
-      "Overview::" + overview,
-      "\n",
-      "Description:" + description,
-      "\n",
-      "Objective:" + objective,
-      "\n"
-    );
   };
   return (
     <div className="div1">

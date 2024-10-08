@@ -14,7 +14,19 @@ const Project_Details = () => {
         value={scope}
         onChange={(e) => setScope(e.target.value)}
       />
-      (deliverables == )
+      <input
+        type="text"
+        placeholder="Deliverables"
+        value={deliverables}
+        onChange={(e) => setDeliverables(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Scope"
+        value={milestones}
+        onChange={(e) => setMilestones(e.target.value)}
+      />
+      <button>Save</button>
     </div>
   );
 };
