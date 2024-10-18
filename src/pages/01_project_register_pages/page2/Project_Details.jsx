@@ -1,13 +1,27 @@
 // Project Details
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 const Project_Details = () => {
   // const [, set] = useState()
   const [scope, setScope] = useState("");
   const [deliverables, setDeliverables] = useState([]);
   const [milestones, setMilestones] = useState({});
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    const currentPageMatch = location.pathname.match(/\/page(\d+)/);
+    if (currentPageMatch) {
+      const currentPageNumber = parseInt(currentPageMatch[1]);
+      const nextPageNumber = currentPageNumber + 1;
+      navigate(`/page${nextPageNumber}`);
+    }
+  };
+  const handleSave = (e) => {
+    // e.preventDefault();
+  };
   return (
-    <div>
-      <h1>Project_Details</h1>
+    <div className="div1">
+      <h1>Project Details</h1>
       <input
         type="text"
         placeholder="Scope"
@@ -26,7 +40,34 @@ const Project_Details = () => {
         value={milestones}
         onChange={(e) => setMilestones(e.target.value)}
       />
-      <button>Save</button>
+      <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+        <button
+          className="bp1"
+          onClick={handleSave}
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            border: "none",
+            height: "50ox",
+            width: "60px",
+          }}
+        >
+          Save
+        </button>
+        <button
+          className="bp1"
+          onClick={handleNavigation}
+          style={{
+            backgroundColor: "blue",
+            color: "white",
+            border: "none",
+            height: "50ox",
+            width: "60px",
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

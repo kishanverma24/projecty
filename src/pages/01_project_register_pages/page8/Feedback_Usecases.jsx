@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Feedback_Usecases = () => {
   const [feedbackMechanism, setFeedbackMechanism] = useState("");
   const [communicationPlan, setCommunicationPlan] = useState("");
   const [example, setExample] = useState("");
   const [useCases, setUseCases] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    const currentPageMatch = location.pathname.match(/\/page(\d+)/);
+    if (currentPageMatch) {
+      const currentPageNumber = parseInt(currentPageMatch[1]);
+      const nextPageNumber = currentPageNumber + 1;
+      navigate(`/page${nextPageNumber}`);
+    }
+  };
+  const handleSave = (e) => {
+    // e.preventDefault();
+  };
   return (
-    <div>
-      <h1>Feedback_Usecases</h1>
+    <div className="div1">
+      <h1>Feedback Usecases</h1>
       <input
         type="text"
         value={feedbackMechanism}
         onChange={(e) => {
           setFeedbackMechanism(e.target.value);
         }}
+        placeholder="Feedback Mechanism"
       />
       <input
         type="text"
@@ -21,6 +36,7 @@ const Feedback_Usecases = () => {
         onChange={(e) => {
           setCommunicationPlan(e.target.value);
         }}
+        placeholder="Communication Plan"
       />
 
       <input
@@ -29,6 +45,7 @@ const Feedback_Usecases = () => {
         onChange={(e) => {
           setExample(e.target.value);
         }}
+        placeholder="Project Examples"
       />
 
       <input
@@ -37,8 +54,36 @@ const Feedback_Usecases = () => {
         onChange={(e) => {
           setUseCases(e.target.value);
         }}
+        placeholder="Use Cases"
       />
-      <button>Save</button>
+       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+        <button
+          className="bp1"
+          onClick={handleSave}
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            border: "none",
+            height: "50ox",
+            width: "60px",
+          }}
+        >
+          Save
+        </button>
+        <button
+          className="bp1"
+          onClick={handleNavigation}
+          style={{
+            backgroundColor: "blue",
+            color: "white",
+            border: "none",
+            height: "50ox",
+            width: "60px",
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
