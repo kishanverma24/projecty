@@ -9,6 +9,7 @@ import Page6 from "./pages/01_Project_Register_Pages/page6/Contact_Information";
 import Page7 from "./pages/01_Project_Register_Pages/page7/Budget_Funding";
 import Page8 from "./pages/01_Project_Register_Pages/page8/Feedback_Usecases";
 import Page9 from "./pages/01_Project_Register_Pages/page9/Collaboration_Needs_Profiles";
+import MainForm from "./pages/PP/MainForm";
 export default function App() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/page7" element={<Page7 />} />
         <Route path="/page8" element={<Page8 />} />
         <Route path="/page9" element={<Page9 />} />
+        <Route path="/pp" element={<MainForm />} />
       </Routes>
     </BrowserRouter>
   );
