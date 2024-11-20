@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import axios from "axios";
+import "./pro_reg.css";
 import Step1 from "./step1/Step1";
 import Step2 from "./step2/Step2";
 import Step3 from "./step3/Step3";
@@ -11,7 +12,6 @@ import Step8 from "./step8/Step8";
 import Step9 from "./step9/Step9";
 import Step10 from "./step10/Step10";
 import Step11 from "./step11/Step11";
-import Step12 from "./step12/Step12";
 
 function MainForm() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -84,23 +84,21 @@ function MainForm() {
         return <Step10 formData={formData} updateFormData={updateFormData} />;
       case 11:
         return <Step11 formData={formData} updateFormData={updateFormData} />;
-      case 12:
-        return <Step12 formData={formData} updateFormData={updateFormData} />;
       default:
         return <Step1 formData={formData} updateFormData={updateFormData} />;
     }
   };
 
   return (
-    <div>
-      <h1>Project Form</h1>
+    <div className="pro_reg_page">
+      <h1 className="main-h1">Project Registration Form</h1>
       {renderStep()}
       <div>
-        {currentStep > 1 && <button onClick={prevStep}>Back</button>}
-        {currentStep < 12 ? (
-          <button onClick={nextStep}>Next</button>
+        {currentStep > 1 && <button className="back-button" onClick={prevStep}>Back</button>}
+        {currentStep < 11 ? (
+          <button className="next-button" onClick={nextStep}>Next</button>
         ) : (
-          <button onClick={handleSubmit}>Submit Project</button>
+          <button className="next-button" onClick={handleSubmit}>Submit Project</button>
         )}
       </div>
     </div>

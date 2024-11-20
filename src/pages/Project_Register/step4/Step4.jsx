@@ -1,38 +1,11 @@
-// // Step4.js
-// import React, { useState, useEffect } from "react";
-
-// function Step4({ formData, updateFormData }) {
-//   const [deliverables, setDeliverables] = useState(
-//     formData.deliverables !== undefined ? formData.deliverables : ["a","b","c"]
-//   );
-
-//   const save = () => {
-//     updateFormData({ deliverables });
-//   };
-//   return (
-//     <div>
-//       <h2>Step 4: Deliverables</h2>
-//       <textarea
-//         placeholder="Project Deliverables"
-//         value={deliverables}
-//         onChange={(e) => setDeliverables(e.target.value)}
-//       />
-//       <button onClick={save}>Add</button>
-//       <button onClick={save}>Update</button>
-//       <button onClick={save}>Delete</button>
-//       <button onClick={save}>Save</button>
-//     </div>
-//   );
-// }
-
-// export default Step4;
-
 import React, { useState, useEffect } from "react";
+import "./step4.css";
 
 function Step4({ formData, updateFormData }) {
-  const [deliverables, setDeliverables] = useState(Array.isArray(formData.deliverables) ? formData.deliverables : []);
+  const [deliverables, setDeliverables] = useState(
+    Array.isArray(formData.deliverables) ? formData.deliverables : []
+  );
   const [newDeliverable, setNewDeliverable] = useState(""); // State for the new deliverable input
-
 
   const save = () => {
     updateFormData({ deliverables });
@@ -67,17 +40,16 @@ function Step4({ formData, updateFormData }) {
             />
           ))
         : console.log("No deliverables")}
-
       <textarea
         placeholder="Add New Deliverable"
         value={newDeliverable} // Bind to new deliverable state
         onChange={handleNewDeliverableChange} // Handle changes for the new input
       />
-      <button onClick={addNewDeliverable}>Add Deliverable</button> {/* Button to add new deliverable */}
+      <button onClick={addNewDeliverable}>Add Deliverable</button>{" "}
+      {/* Button to add new deliverable */}
       <button onClick={save}>Save</button>
     </div>
   );
 }
 
 export default Step4;
-

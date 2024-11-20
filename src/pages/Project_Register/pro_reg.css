@@ -1,0 +1,42 @@
+.pro_reg_page {
+  display: flex;
+  flex-direction: column;
+  background-color: burlywood;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+.main-h1 {
+  position: absolute; /* Fix the element relative to the viewport */
+  top: 0%; /* Position it 20px from the bottom */
+  padding: 10px 20px;
+  background-color: rgb(255, 236, 127);
+  color: black;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.next-button {
+  position: fixed; /* Fix the element relative to the viewport */
+  bottom: 5%; /* Position it 20px from the bottom */
+  right: 5%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for exact centering */
+  padding: 10px 20px;
+  background-color: aquamarine;
+  color: black;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.back-button {
+  position: fixed; /* Fix the element relative to the viewport */
+  bottom: 6%; /* Position it 20px from the bottom */
+  left: 5%; /* Center it horizontally */
+  transform: translateX(50%); /* Adjust for exact centering */
+  padding: 10px 20px;
+  background-color: aquamarine;
+  color: black;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
