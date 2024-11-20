@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 // import axios from "axios";
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
-import Step4 from "./Step4";
-import Step5 from "./Step5";
-import Step6 from "./Step6";
-import Step7 from "./Step7";
-import Step8 from "./Step8";
-import Step9 from "./Step9";
-import Step10 from "./Step10";
-import Step11 from "./Step11";
-import Step12 from "./Step12";
+import Step1 from "./step1/Step1";
+import Step2 from "./step2/Step2";
+import Step3 from "./step3/Step3";
+import Step4 from "./step4/Step4";
+import Step5 from "./step5/Step5";
+import Step6 from "./step6/Step6";
+import Step7 from "./step7/Step7";
+import Step8 from "./step8/Step8";
+import Step9 from "./step9/Step9";
+import Step10 from "./step10/Step10";
+import Step11 from "./step11/Step11";
+import Step12 from "./step12/Step12";
 
 function MainForm() {
   const [currentStep, setCurrentStep] = useState(1);
