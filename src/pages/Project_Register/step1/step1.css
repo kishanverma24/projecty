@@ -17,6 +17,10 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.title_div label {
+  font-size: large;
+}
 .title_div input {
   height: 20px;
   width: 50vw;

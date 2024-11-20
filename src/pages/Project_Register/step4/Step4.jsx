@@ -28,7 +28,7 @@ function Step4({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="deliverable_div">
       <h2>Step 4: Deliverables</h2>
       {deliverables.length !== 0
         ? deliverables.map((del, index) => (
@@ -40,14 +40,18 @@ function Step4({ formData, updateFormData }) {
             />
           ))
         : console.log("No deliverables")}
-      <textarea
-        placeholder="Add New Deliverable"
-        value={newDeliverable} // Bind to new deliverable state
-        onChange={handleNewDeliverableChange} // Handle changes for the new input
-      />
-      <button onClick={addNewDeliverable}>Add Deliverable</button>{" "}
+      <div>
+        <textarea
+          placeholder="Add New Deliverable"
+          value={newDeliverable} // Bind to new deliverable state
+          onChange={handleNewDeliverableChange} // Handle changes for the new input
+        />
+        <button className="addButton" onClick={addNewDeliverable}>Add</button>{" "}
+      </div>
       {/* Button to add new deliverable */}
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

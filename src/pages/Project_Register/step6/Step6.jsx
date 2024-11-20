@@ -49,35 +49,33 @@ function Step6({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="technologies_div">
       <h2>Step 6: Technical Requirements</h2>
 
       {/* Display existing technologies */}
-      {Object.keys(technologies).length !== 0 ? (
-        Object.keys(technologies).map((key) => (
-          <div key={key}>
-            {/* Editable Key */}
-            <textarea
-              placeholder="Technology Category"
-              value={key}
-              onChange={(e) => handleTechnologyKeyChange(key, e.target.value)} // Handle key change
-            />
-            {/* Editable Value */}
-            <textarea
-              placeholder="Technologies"
-              value={technologies[key]}
-              onChange={
-                (e) => handleTechnologyValueChange(key, e.target.value) // Handle value change
-              }
-            />
-          </div>
-        ))
-      ) : (
-        ("")
-      )}
+      {Object.keys(technologies).length !== 0
+        ? Object.keys(technologies).map((key) => (
+            <div className="technology_subdiv" key={key}>
+              {/* Editable Key */}
+              <textarea
+                placeholder="Technology Category"
+                value={key}
+                onChange={(e) => handleTechnologyKeyChange(key, e.target.value)} // Handle key change
+              />
+              {/* Editable Value */}
+              <textarea
+                placeholder="Technologies"
+                value={technologies[key]}
+                onChange={
+                  (e) => handleTechnologyValueChange(key, e.target.value) // Handle value change
+                }
+              />
+            </div>
+          ))
+        : ""}
 
       {/* Input for adding new technology */}
-      <div>
+      <div className="technology_subdiv">
         <input
           type="text"
           placeholder="Technology Category (e.g., Programming Languages)"
@@ -89,10 +87,12 @@ function Step6({ formData, updateFormData }) {
           value={newTechnologyValue}
           onChange={(e) => setNewTechnologyValue(e.target.value)} // Handle value input
         />
-        <button onClick={addNewTechnology}>Add Technology</button>
+        <button className="addButton" onClick={addNewTechnology}>Add</button>
       </div>
 
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

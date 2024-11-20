@@ -10,17 +10,19 @@ function Step3({ formData, updateFormData }) {
   // }, [scope]);
   const save = () => {
     updateFormData({ scope });
-};
+  };
 
   return (
-    <div>
+    <div className="scope_div">
       <h2>Step 3: Project Scope</h2>
       <textarea
         placeholder="Project Scope"
         value={scope}
         onChange={(e) => setScope(e.target.value)}
       />
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

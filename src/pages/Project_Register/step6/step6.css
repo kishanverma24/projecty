@@ -1,4 +1,4 @@
-.step1_div {
+.technologies_div {
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -9,14 +9,14 @@
     gap: 15px;
     overflow: scroll;
   }
-  .step1_div::-webkit-scrollbar {
+  .technologies_div::-webkit-scrollbar {
     display: none; /* Hide scrollbar in webkit-based browsers */
   }
-  .title_div {
+  .technology_subdiv{
     display: flex;
-    flex-direction: column;
     gap: 20px;
   }
+ 
   .title_div input {
     height: 20px;
     width: 50vw;
@@ -34,4 +34,6 @@
     margin: 5px;
     cursor: pointer;
   }
-  
+  .addButton{
+    cursor: pointer;
+  }

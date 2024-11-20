@@ -49,34 +49,35 @@ function Step5({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="milestone_div">
       <h2>Step 5: Milestones</h2>
-      {Object.keys(milestones).length !== 0 ? (
-        Object.keys(milestones).map((key) => (
-          <div key={key}>
-            {/* Editable Key */}
-            <textarea
-              placeholder="Milestone Key"
-              value={key}
-              onChange={
-                (e) => handleMilestoneKeyChange(key, e.target.value) // Handle key change
-              }
-            />
-            {/* Editable Value */}
-            <textarea
-              placeholder="Milestone Value"
-              value={milestones[key]}
-              onChange={
-                (e) => handleMilestoneValueChange(key, e.target.value) // Handle value change
-              }
-            />
-          </div>
-        ))
-      ) : ("")}
+      {Object.keys(milestones).length !== 0
+        ? Object.keys(milestones).map((key) => (
+            <div className="subMilestone_div" key={key}>
+              {/* Editable Key */}
+              <textarea
+                placeholder="Milestone Key"
+                value={key}
+                onChange={
+                  (e) => handleMilestoneKeyChange(key, e.target.value) // Handle key change
+                }
+              />
+              {/* Editable Value */}
+              <textarea
+                placeholder="Milestone Value"
+                value={milestones[key]}
+                onChange={
+                  (e) => handleMilestoneValueChange(key, e.target.value) // Handle value change
+                }
+              />
+            </div>
+          ))
+        : ""}
 
       {/* New Milestone Input */}
-      <div>
+      <div className="subMilestone_div ">
         <input
+          className="subMilestone_div_inp"
           type="text"
           placeholder="Milestone Key"
           value={newMilestoneKey}
@@ -87,10 +88,12 @@ function Step5({ formData, updateFormData }) {
           value={newMilestoneValue}
           onChange={(e) => setNewMilestoneValue(e.target.value)}
         />
-        <button onClick={addNewMilestone}>Add Milestone</button>
+        <button className="addButton" onClick={addNewMilestone}>Add</button>
       </div>
 
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

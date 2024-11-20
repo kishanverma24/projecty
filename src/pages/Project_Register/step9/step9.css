@@ -1,4 +1,4 @@
-.step1_div {
+.collaboration_div {
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -9,15 +9,19 @@
     gap: 15px;
     overflow: scroll;
   }
-  .step1_div::-webkit-scrollbar {
+  .collaboration_div::-webkit-scrollbar {
     display: none; /* Hide scrollbar in webkit-based browsers */
   }
-  .title_div {
+  .subcollaboration_div {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
-  .title_div input {
+  .subRole_div{
+    display: flex;
+    gap: 5px;
+  }
+  .subcollaboration_div input {
     height: 20px;
     width: 50vw;
   }
@@ -35,3 +39,6 @@
     cursor: pointer;
   }
   
+  .addButton{
+    cursor: pointer;
+  }

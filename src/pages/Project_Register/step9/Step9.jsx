@@ -31,6 +31,29 @@ function Step9({ formData, updateFormData }) {
   };
 
   // Handle the change in responsibilities for existing roles
+  // const handleResponsibilityKeyChange = (oldRole, newRole) => {
+  //   if (newKey === oldKey || !newKey.trim()) return; // Avoid empty or same key
+
+  //   setRolesAndResponsibilities((prevRoles) => ({
+  //     ...prevRoles,
+  //     [role]: value, // Update responsibility for the specific role
+  //   }));
+  // };
+// ---------------------
+const handleResponsibilityKeyChange = (oldRole, newRole) => {
+  if (newRole === oldRole || !newRole.trim()) return; // Avoid empty or same key
+
+  setSystemRequirements((prevRoles) => {
+    const { [oldRole]: _, ...rest } = prevRoles; // Remove old key
+    return {
+      ...rest,
+      [newRole]: prevSystemRequirements[oldRole], // Add new key with the old value
+    };
+  });
+};
+
+
+  // ----------
   const handleResponsibilityChange = (role, value) => {
     setRolesAndResponsibilities((prevRoles) => ({
       ...prevRoles,
@@ -62,7 +85,7 @@ function Step9({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="collaboration_div">
       <h2>Step 9: Collaboration Needs</h2>
       {/* Skills Required Section */}
       <h3>Skills Required</h3>
@@ -90,18 +113,18 @@ function Step9({ formData, updateFormData }) {
           value={newSkill}
           onChange={(e) => setNewSkill(e.target.value)} // Handle changes for new skill input
         />
-        <button onClick={addNewSkill}>Add Skill</button>
+        <button className="addButton" onClick={addNewSkill}>Add Skill</button>
       </div>
       {/* Roles and Responsibilities Section */}
       <h3>Roles and Responsibilities</h3>
       {Object.keys(rolesAndResponsibilities).length !== 0
         ? Object.keys(rolesAndResponsibilities).map((role) => (
-            <div key={role}>
+            <div className="subRole_div" key={role}>
               <textarea
                 placeholder="Role"
                 value={role}
                 onChange={
-                  (e) => handleResponsibilityChange(role, e.target.value) // Handle role change
+                  (e) => handleResponsibilityKeyChange(role, e.target.value) // Handle role change
                 }
               />
               <textarea
@@ -116,7 +139,7 @@ function Step9({ formData, updateFormData }) {
         : ""}
 
       {/* New Role and Responsibility Input */}
-      <div>
+      <div className="subRole_div">
         <input
           type="text"
           placeholder="Role"
@@ -128,10 +151,10 @@ function Step9({ formData, updateFormData }) {
           value={newResponsibility}
           onChange={handleNewResponsibilityChange} // Handle changes for the new responsibility input
         />
-        <button onClick={addNewRole}>Add Role</button>
+        <button className="addButton" onClick={addNewRole}>Add Role</button>
       </div>
 
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>Save</button>
     </div>
   );
 }

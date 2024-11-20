@@ -1,4 +1,4 @@
-.step1_div {
+.projectDuration_div {
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -9,13 +9,17 @@
     gap: 15px;
     overflow: scroll;
   }
-  .step1_div::-webkit-scrollbar {
+  .projectDuration_div::-webkit-scrollbar {
     display: none; /* Hide scrollbar in webkit-based browsers */
   }
   .title_div {
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+  .subDuration_div{
+    display: flex;
+    gap: 5px;
   }
   .title_div input {
     height: 20px;
@@ -34,4 +38,6 @@
     margin: 5px;
     cursor: pointer;
   }
-  
+  .addButton{
+    cursor: pointer;
+  }

@@ -15,7 +15,7 @@ function Step8({ formData, updateFormData }) {
   //   updateFormData({ progress });
   // }, [progress]);
   const save = () => {
-    updateFormData({ developmentStage,progress });
+    updateFormData({ developmentStage, progress });
   };
   const handleProgressChange = (index, value) => {
     const newProgress = [...progress];
@@ -34,17 +34,16 @@ function Step8({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="development_div">
       <h2>Step 8: Current Status and Progress</h2>
-      <h5>Development Stage</h5>
+      <h3>Development Stage</h3>
       <textarea
         placeholder="Current Project Progress"
         value={developmentStage}
         onChange={(e) => setDevelopmentStage(e.target.value)}
       />
-     
-      <div>
-      <h5>Progress</h5>
+
+      <h3>Progress</h3>
       {progress.length !== 0
         ? progress.map((prog, index) => (
             <textarea
@@ -55,15 +54,16 @@ function Step8({ formData, updateFormData }) {
             />
           ))
         : console.log("No deliverables")}
-      <textarea
-        placeholder="Add New Progress"
-        value={newProgress} // Bind to new deliverable state
-        onChange={handleNewProgressChange} // Handle changes for the new input
-      />
-      <button onClick={addNewProgress}>Add Progress</button>{" "}
+      <div>
+        <textarea
+          placeholder="Add New Progress"
+          value={newProgress} // Bind to new deliverable state
+          onChange={handleNewProgressChange} // Handle changes for the new input
+        />
+        <button className="addButton" onClick={addNewProgress}>Add Progress</button>{" "}
+      </div>
       {/* Button to add new deliverable */}
-    </div>
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>Save</button>
     </div>
   );
 }

@@ -12,9 +12,9 @@ function Step11({ formData, updateFormData }) {
   );
 
   // useEffect hook to update form data when primaryContact or communicationChannels change
-  useEffect(() => {
-    updateFormData({ primaryContact, communicationChannels });
-  }, [primaryContact, communicationChannels, updateFormData]);
+  // useEffect(() => {
+  //   updateFormData({ primaryContact, communicationChannels });
+  // }, [primaryContact, communicationChannels, updateFormData]);
 
   // Handle change for primary contact fields (name, role)
   const handlePrimaryContactChange = (e) => {
@@ -40,45 +40,49 @@ function Step11({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="primaryContact_div">
       <h2>Step 11: Contact Information and Communication Plan</h2>
 
       {/* Primary Contact Information */}
-      <h5>Primary Contact</h5>
-      <input
-        type="text"
-        name="name"
-        placeholder="Contact Name"
-        value={primaryContact.name}
-        onChange={handlePrimaryContactChange}
-      />
-      <input
-        type="text"
-        name="role"
-        placeholder="Contact Role"
-        value={primaryContact.role}
-        onChange={handlePrimaryContactChange}
-      />
+      <h3>Primary Contact</h3>
+      <div className="subPrimaryContact_div">
+        <input
+          type="text"
+          name="name"
+          placeholder="Contact Name"
+          value={primaryContact.name}
+          onChange={handlePrimaryContactChange}
+        />
+        <input
+          type="text"
+          name="role"
+          placeholder="Contact Role"
+          value={primaryContact.role}
+          onChange={handlePrimaryContactChange}
+        />
+      </div>
 
       {/* Communication Channels */}
-      <h5>Preferred Communication Channels</h5>
-      <input
-        type="text"
-        name="email"
-        placeholder="Email Address"
-        value={communicationChannels.email}
-        onChange={handleCommunicationChannelChange}
-      />
-      <input
-        type="text"
-        name="slack"
-        placeholder="Slack Username"
-        value={communicationChannels.slack}
-        onChange={handleCommunicationChannelChange}
-      />
+      <h3>Preferred Communication Channels</h3>
+      <div className="subPrimaryContact_div">
+        <input
+          type="text"
+          name="email"
+          placeholder="Email Address"
+          value={communicationChannels.email}
+          onChange={handleCommunicationChannelChange}
+        />
+        <input
+          type="text"
+          name="slack"
+          placeholder="Slack Username"
+          value={communicationChannels.slack}
+          onChange={handleCommunicationChannelChange}
+        />
+      </div>
 
       {/* Save Button */}
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>Save</button>
     </div>
   );
 }

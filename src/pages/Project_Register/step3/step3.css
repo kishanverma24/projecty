@@ -1,4 +1,4 @@
-.step1_div {
+.scope_div {
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -9,19 +9,12 @@
     gap: 15px;
     overflow: scroll;
   }
-  .step1_div::-webkit-scrollbar {
+  .scope_div::-webkit-scrollbar {
     display: none; /* Hide scrollbar in webkit-based browsers */
   }
-  .title_div {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .title_div input {
-    height: 20px;
-    width: 50vw;
-  }
-  .title_div textarea {
+
+ 
+  .scope_div textarea {
     height: 80px;
     width: 50vw;
   }

@@ -1,4 +1,4 @@
-.step1_div {
+.development_div {
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -9,10 +9,10 @@
     gap: 15px;
     overflow: scroll;
   }
-  .step1_div::-webkit-scrollbar {
+  .development_div::-webkit-scrollbar {
     display: none; /* Hide scrollbar in webkit-based browsers */
   }
-  .title_div {
+  .subdevelopment_div {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -34,4 +34,6 @@
     margin: 5px;
     cursor: pointer;
   }
-  
+  .addButton{
+    cursor: pointer;
+  }

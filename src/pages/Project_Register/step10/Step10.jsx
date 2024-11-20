@@ -49,11 +49,11 @@ function Step10({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="projectDuration_div">
       <h2>Step 10: Timeline</h2>
 
       {/* Project Duration Section */}
-      <h5>Project Duration</h5>
+      <h3>Project Duration</h3>
       <textarea
         placeholder="Project Duration (e.g., September 2024 – September 2025)"
         value={projectDuration}
@@ -61,10 +61,10 @@ function Step10({ formData, updateFormData }) {
       />
 
       {/* Key Dates Section */}
-      <h5>Key Dates</h5>
+      <h3>Key Dates</h3>
       {Object.keys(keyDates).length !== 0
         ? Object.keys(keyDates).map((key) => (
-            <div key={key}>
+            <div className="subDuration_div" key={key}>
               {/* Editable Key Date */}
               <textarea
                 placeholder="Key Date"
@@ -82,7 +82,7 @@ function Step10({ formData, updateFormData }) {
         : ""}
 
       {/* New Key Date Inputs */}
-      <div>
+      <div className="subDuration_div">
         <input
           type="text"
           placeholder="New Key Date"
@@ -94,11 +94,11 @@ function Step10({ formData, updateFormData }) {
           value={newKeyDateValue}
           onChange={handleNewKeyDateValueChange} // Handle changes for the new value input
         />
-        <button onClick={addNewKeyDate}>Add Key Date</button>{" "}
+        <button className="addButton" onClick={addNewKeyDate}>Add Key Date</button>{" "}
         {/* Button to add new key date */}
       </div>
 
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>Save</button>
     </div>
   );
 }

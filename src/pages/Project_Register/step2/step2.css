@@ -1,37 +1,39 @@
 .step2_div {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    align-items: center;
-    background-color: brown;
-    height: 70vh;
-    justify-content: space-around;
-    gap: 15px;
-    overflow: scroll;
-  }
-  .step2_div::-webkit-scrollbar {
-    display: none; /* Hide scrollbar in webkit-based browsers */
-  }
-  .problem_desc_div {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .problem_desc_div input {
-    height: 20px;
-    width: 50vw;
-  }
-  .problem_desc_div textarea {
-    height: 80px;
-    width: 50vw;
-  }
-  .saveButton {
-    height: 30px;
-    width: 80%;
-    font-size: medium;
-    font-weight: bolder;
-    margin: 5px;
-    cursor: pointer;
-    border: 1px solid rgba(247, 153, 12, 0.651);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  align-items: center;
+  background-color: brown;
+  height: 70vh;
+  justify-content: space-around;
+  gap: 15px;
+  overflow: scroll;
+}
+.step2_div::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in webkit-based browsers */
+}
+.problem_desc_div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.problem_desc_div label {
+  font-size: large;
+}
+.problem_desc_div input {
+  height: 20px;
+  width: 50vw;
+}
+.problem_desc_div textarea {
+  height: 80px;
+  width: 50vw;
+}
+.saveButton {
+  height: 30px;
+  width: 80%;
+  font-size: medium;
+  font-weight: bolder;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid rgba(247, 153, 12, 0.651);
+}

@@ -1,4 +1,4 @@
-.step1_div {
+.requirment_div {
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -9,12 +9,11 @@
     gap: 15px;
     overflow: scroll;
   }
-  .step1_div::-webkit-scrollbar {
+  .requirment_div::-webkit-scrollbar {
     display: none; /* Hide scrollbar in webkit-based browsers */
   }
-  .title_div {
+  .subrequirment_div {
     display: flex;
-    flex-direction: column;
     gap: 20px;
   }
   .title_div input {
@@ -34,4 +33,6 @@
     margin: 5px;
     cursor: pointer;
   }
-  
+  .addButton{
+    cursor: pointer;
+  }

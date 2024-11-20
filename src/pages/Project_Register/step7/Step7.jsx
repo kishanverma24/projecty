@@ -50,13 +50,13 @@ function Step7({ formData, updateFormData }) {
   };
 
   return (
-    <div>
+    <div className="requirment_div">
       <h2>Step 7: System Requirements</h2>
 
       {/* Display existing system requirements */}
       {Object.keys(systemRequirements).length !== 0
         ? Object.keys(systemRequirements).map((key) => (
-            <div key={key}>
+            <div className="subrequirment_div" key={key}>
               {/* Editable Key */}
               <textarea
                 placeholder="Requirement Category"
@@ -78,7 +78,7 @@ function Step7({ formData, updateFormData }) {
         : ""}
 
       {/* Input for adding new system requirement */}
-      <div>
+      <div className="subrequirment_div">
         <input
           type="text"
           placeholder="Requirement Category (e.g., Operating System)"
@@ -90,10 +90,10 @@ function Step7({ formData, updateFormData }) {
           value={newRequirementValue}
           onChange={(e) => setNewRequirementValue(e.target.value)} // Handle value input
         />
-        <button onClick={addNewRequirement}>Add System Requirement</button>
+        <button className="addButton" onClick={addNewRequirement}>Add</button>
       </div>
 
-      <button onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>Save</button>
     </div>
   );
 }
