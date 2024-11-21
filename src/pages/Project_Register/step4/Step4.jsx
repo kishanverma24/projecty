@@ -39,7 +39,7 @@ function Step4({ formData, updateFormData }) {
               onChange={(e) => handleDeliverableChange(index, e.target.value)} // Pass index and new value
             />
           ))
-        : console.log("No deliverables")}
+        : ""}
       <div>
         <textarea
           placeholder="Add New Deliverable"
