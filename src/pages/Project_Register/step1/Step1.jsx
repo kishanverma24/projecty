@@ -1,13 +1,9 @@
 // Step1.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./step1.css";
 function Step1({ formData, updateFormData }) {
   const [title, setTitle] = useState(formData.title || "");
   const [overview, setOverview] = useState(formData.overview || "");
-
-  // useEffect(() => {
-  //   updateFormData({ title, overview });
-  // }, [title, overview]);
 
   const save = () => {
     updateFormData({ title, overview });

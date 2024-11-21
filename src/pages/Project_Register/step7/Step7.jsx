@@ -10,10 +10,7 @@ function Step7({ formData, updateFormData }) {
   );
   const [newRequirementKey, setNewRequirementKey] = useState(""); // For new key input
   const [newRequirementValue, setNewRequirementValue] = useState(""); // For new value input
-
-  useEffect(() => {
-    updateFormData({ systemRequirements });
-  }, [systemRequirements, updateFormData]);
+  const [editableKey, setEditableKey] = useState({});
 
   const save = () => {
     updateFormData({ systemRequirements });
@@ -60,10 +57,13 @@ function Step7({ formData, updateFormData }) {
               {/* Editable Key */}
               <textarea
                 placeholder="Requirement Category"
-                value={key}
+                value={editableKey.hasOwnProperty(key) ? editableKey[key] : key}
                 onChange={(e) =>
-                  handleRequirementKeyChange(key, e.target.value)
-                } // Handle key change
+                  setEditableKey((prev) => ({
+                    ...prev,
+                    [key]: e.target.value,
+                  }))
+                }
               />
               {/* Editable Value */}
               <textarea
@@ -73,6 +73,17 @@ function Step7({ formData, updateFormData }) {
                   (e) => handleRequirementValueChange(key, e.target.value) // Handle value change
                 }
               />
+              {editableKey.hasOwnProperty(key) ? (
+                <button
+                  onClick={() =>
+                    handleRequirementKeyChange(key, editableKey[key])
+                  }
+                >
+                  Save
+                </button>
+              ) : (
+                <button type="button">Well</button>
+              )}
             </div>
           ))
         : ""}
@@ -90,10 +101,14 @@ function Step7({ formData, updateFormData }) {
           value={newRequirementValue}
           onChange={(e) => setNewRequirementValue(e.target.value)} // Handle value input
         />
-        <button className="addButton" onClick={addNewRequirement}>Add</button>
+        <button className="addButton" onClick={addNewRequirement}>
+          Add
+        </button>
       </div>
 
-      <button className="saveButton" onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

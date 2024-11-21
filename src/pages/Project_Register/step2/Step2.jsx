@@ -1,13 +1,10 @@
 // Step2.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./step2.css";
 function Step2({ formData, updateFormData }) {
   const [description, setDescription] = useState(formData.description || "");
   const [objective, setObjective] = useState(formData.objective || "");
 
-  // useEffect(() => {
-  //   updateFormData({ description, objective });
-  // }, [description, objective]);
   const save = () => {
     updateFormData({ description, objective });
   };
@@ -34,7 +31,9 @@ function Step2({ formData, updateFormData }) {
           name="project objective"
         />
       </div>
-      <button className="saveButton" onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

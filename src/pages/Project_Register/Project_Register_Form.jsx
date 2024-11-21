@@ -58,7 +58,7 @@ function MainForm() {
   //     .catch(error => console.error('Error saving project:', error));
   // };
   const handleSubmit = () => {
-    console.log("Hello G");
+    console.log(formData);
   };
   const renderStep = () => {
     switch (currentStep) {
@@ -94,11 +94,19 @@ function MainForm() {
       <h1 className="main-h1">Project Registration Form</h1>
       {renderStep()}
       <div>
-        {currentStep > 1 && <button className="back-button" onClick={prevStep}>Back</button>}
+        {currentStep > 1 && (
+          <button className="back-button" onClick={prevStep}>
+            Back
+          </button>
+        )}
         {currentStep < 11 ? (
-          <button className="next-button" onClick={nextStep}>Next</button>
+          <button className="next-button" onClick={nextStep}>
+            Next
+          </button>
         ) : (
-          <button className="next-button" onClick={handleSubmit}>Submit Project</button>
+          <button className="next-button" onClick={handleSubmit}>
+            Submit Project
+          </button>
         )}
       </div>
     </div>

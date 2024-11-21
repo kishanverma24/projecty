@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./step4.css";
 
 function Step4({ formData, updateFormData }) {
@@ -46,7 +46,9 @@ function Step4({ formData, updateFormData }) {
           value={newDeliverable} // Bind to new deliverable state
           onChange={handleNewDeliverableChange} // Handle changes for the new input
         />
-        <button className="addButton" onClick={addNewDeliverable}>Add</button>{" "}
+        <button className="addButton" onClick={addNewDeliverable}>
+          Add
+        </button>{" "}
       </div>
       {/* Button to add new deliverable */}
       <button className="saveButton" onClick={save}>

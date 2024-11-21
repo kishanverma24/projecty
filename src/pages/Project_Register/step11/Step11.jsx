@@ -11,12 +11,6 @@ function Step11({ formData, updateFormData }) {
     formData.communicationChannels || { email: "", slack: "" }
   );
 
-  // useEffect hook to update form data when primaryContact or communicationChannels change
-  // useEffect(() => {
-  //   updateFormData({ primaryContact, communicationChannels });
-  // }, [primaryContact, communicationChannels, updateFormData]);
-
-  // Handle change for primary contact fields (name, role)
   const handlePrimaryContactChange = (e) => {
     const { name, value } = e.target;
     setPrimaryContact((prevContact) => ({
@@ -44,7 +38,7 @@ function Step11({ formData, updateFormData }) {
       <h2>Step 11: Contact Information and Communication Plan</h2>
 
       {/* Primary Contact Information */}
-      <h3>Primary Contact</h3>
+      <h>Primary Contact</h>
       <div className="subPrimaryContact_div">
         <input
           type="text"
@@ -82,7 +76,9 @@ function Step11({ formData, updateFormData }) {
       </div>
 
       {/* Save Button */}
-      <button className="saveButton" onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

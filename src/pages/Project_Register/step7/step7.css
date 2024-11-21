@@ -1,38 +1,38 @@
 .requirment_div {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    align-items: center;
-    background-color: brown;
-    height: 70vh;
-    justify-content: space-around;
-    gap: 15px;
-    overflow: scroll;
-  }
-  .requirment_div::-webkit-scrollbar {
-    display: none; /* Hide scrollbar in webkit-based browsers */
-  }
-  .subrequirment_div {
-    display: flex;
-    gap: 20px;
-  }
-  .title_div input {
-    height: 20px;
-    width: 50vw;
-  }
-  .title_div textarea {
-    height: 80px;
-    width: 50vw;
-  }
-  .saveButton {
-    height: 30px;
-    width: 80%;
-    border: none;
-    font-size: medium;
-    font-weight: bolder;
-    margin: 5px;
-    cursor: pointer;
-  }
-  .addButton{
-    cursor: pointer;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  align-items: center;
+  background-color: brown;
+  height: 70vh;
+  justify-content: space-around;
+  gap: 15px;
+  overflow: scroll;
+}
+.requirment_div::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in webkit-based browsers */
+}
+.subrequirment_div {
+  display: flex;
+  gap: 20px;
+}
+.title_div input {
+  height: 20px;
+  width: 50vw;
+}
+.title_div textarea {
+  height: 80px;
+  width: 50vw;
+}
+.saveButton {
+  height: 30px;
+  width: 80%;
+  border: none;
+  font-size: medium;
+  font-weight: bolder;
+  margin: 5px;
+  cursor: pointer;
+}
+.addButton {
+  cursor: pointer;
+}

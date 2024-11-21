@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./step5.css";
 
 function Step5({ formData, updateFormData }) {
@@ -9,10 +9,7 @@ function Step5({ formData, updateFormData }) {
   );
   const [newMilestoneKey, setNewMilestoneKey] = useState("");
   const [newMilestoneValue, setNewMilestoneValue] = useState("");
-
-  useEffect(() => {
-    updateFormData({ milestones });
-  }, [milestones, updateFormData]);
+  const [editableKey, setEditableKey] = useState({});
 
   const save = () => {
     updateFormData({ milestones });
@@ -57,10 +54,10 @@ function Step5({ formData, updateFormData }) {
               {/* Editable Key */}
               <textarea
                 placeholder="Milestone Key"
-                value={key}
-                onChange={
-                  (e) => handleMilestoneKeyChange(key, e.target.value) // Handle key change
-                }
+                value={editableKey.hasOwnProperty(key) ? editableKey[key] : key}
+                onChange={(e) =>
+                  setEditableKey((prev) => ({ ...prev, [key]: e.target.value }))
+                } // Handle key change
               />
               {/* Editable Value */}
               <textarea
@@ -70,6 +67,17 @@ function Step5({ formData, updateFormData }) {
                   (e) => handleMilestoneValueChange(key, e.target.value) // Handle value change
                 }
               />
+              {editableKey.hasOwnProperty(key) ? (
+                <button
+                  onClick={() =>
+                    handleMilestoneKeyChange(key, editableKey[key])
+                  }
+                >
+                  Save
+                </button>
+              ) : (
+                <button type="button">Well</button>
+              )}
             </div>
           ))
         : ""}
@@ -88,7 +96,9 @@ function Step5({ formData, updateFormData }) {
           value={newMilestoneValue}
           onChange={(e) => setNewMilestoneValue(e.target.value)}
         />
-        <button className="addButton" onClick={addNewMilestone}>Add</button>
+        <button className="addButton" onClick={addNewMilestone}>
+          Add
+        </button>
       </div>
 
       <button className="saveButton" onClick={save}>

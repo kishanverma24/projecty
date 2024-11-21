@@ -1,13 +1,10 @@
 // Step3.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./step3.css";
 
 function Step3({ formData, updateFormData }) {
   const [scope, setScope] = useState(formData.scope || "");
 
-  // useEffect(() => {
-  //   updateFormData({ scope });
-  // }, [scope]);
   const save = () => {
     updateFormData({ scope });
   };

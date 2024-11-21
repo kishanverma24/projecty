@@ -14,19 +14,27 @@ function Step10({ formData, updateFormData }) {
   );
   const [newKeyDateKey, setNewKeyDateKey] = useState(""); // For adding new key date title
   const [newKeyDateValue, setNewKeyDateValue] = useState(""); // For adding new key date value
-
-  // UseEffect hook to update form data when projectDuration or keyDates change
-  useEffect(() => {
-    updateFormData({ projectDuration, keyDates });
-  }, [projectDuration, keyDates, updateFormData]);
+  const [editableKey, setEditableKey] = useState({});
 
   // Handle saving of data
   const save = () => {
     updateFormData({ projectDuration, keyDates });
   };
 
+  // Handle updating a specific key date key (like Prototype Completion, etc.)
+  const handleKeyDatesKeyChange = (oldKey, newKey) => {
+    if (newKey === oldKey || !newKey.trim()) return; // Avoid empty or same key
+
+    setKeyDates((prevKeyDates) => {
+      const { [oldKey]: _, ...rest } = prevKeyDates; // Remove old key
+      return {
+        ...rest,
+        [newKey]: prevKeyDates[oldKey], // Add new key with the old value
+      };
+    });
+  };
   // Handle updating a specific key date (like Prototype Completion, etc.)
-  const handleKeyDateChange = (key, value) => {
+  const handleKeyDateValueChange = (key, value) => {
     setKeyDates((prevDates) => ({
       ...prevDates,
       [key]: value, // Update the value of a specific key date
@@ -65,18 +73,33 @@ function Step10({ formData, updateFormData }) {
       {Object.keys(keyDates).length !== 0
         ? Object.keys(keyDates).map((key) => (
             <div className="subDuration_div" key={key}>
-              {/* Editable Key Date */}
+              {/* Editable Key Date Key */}
               <textarea
                 placeholder="Key Date"
-                value={key}
-                onChange={(e) => handleKeyDateChange(key, e.target.value)} // Handle key change
+                value={editableKey.hasOwnProperty(key) ? editableKey[key] : key}
+                onChange={(e) =>
+                  setEditableKey((prev) => ({
+                    ...prev,
+                    [key]: e.target.value,
+                  }))
+                }
               />
               {/* Editable Key Date Value */}
               <textarea
                 placeholder="Key Date Value"
                 value={keyDates[key]}
-                onChange={(e) => handleKeyDateChange(key, e.target.value)} // Handle value change
+                onChange={(e) => handleKeyDateValueChange(key, e.target.value)} // Handle value change
               />
+
+              {editableKey.hasOwnProperty(key) ? (
+                <button
+                  onClick={() => handleKeyDatesKeyChange(key, editableKey[key])}
+                >
+                  Save
+                </button>
+              ) : (
+                <button type="button">Well</button>
+              )}
             </div>
           ))
         : ""}
@@ -94,11 +117,15 @@ function Step10({ formData, updateFormData }) {
           value={newKeyDateValue}
           onChange={handleNewKeyDateValueChange} // Handle changes for the new value input
         />
-        <button className="addButton" onClick={addNewKeyDate}>Add Key Date</button>{" "}
+        <button className="addbutton" onClick={addNewKeyDate}>
+          Add Key Date
+        </button>{" "}
         {/* Button to add new key date */}
       </div>
 
-      <button className="saveButton" onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

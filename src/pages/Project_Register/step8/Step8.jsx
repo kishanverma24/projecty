@@ -11,9 +11,6 @@ function Step8({ formData, updateFormData }) {
   );
   const [newProgress, setNewProgress] = useState(""); // State for the new deliverable input
 
-  // useEffect(() => {
-  //   updateFormData({ progress });
-  // }, [progress]);
   const save = () => {
     updateFormData({ developmentStage, progress });
   };
@@ -54,16 +51,20 @@ function Step8({ formData, updateFormData }) {
             />
           ))
         : console.log("No deliverables")}
-      <div>
+      <div className="addbutton_div">
         <textarea
           placeholder="Add New Progress"
           value={newProgress} // Bind to new deliverable state
           onChange={handleNewProgressChange} // Handle changes for the new input
         />
-        <button className="addButton" onClick={addNewProgress}>Add Progress</button>{" "}
+        <button className="addButton" onClick={addNewProgress}>
+          Add Progress
+        </button>{" "}
       </div>
       {/* Button to add new deliverable */}
-      <button className="saveButton" onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

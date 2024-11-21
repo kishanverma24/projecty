@@ -19,41 +19,25 @@ function Step9({ formData, updateFormData }) {
   const [newResponsibility, setNewResponsibility] = useState("");
   // State for new skill required
   const [newSkill, setNewSkill] = useState("");
-
-  // UseEffect hook to update form data when either roles/responsibilities or skills changes
-  // useEffect(() => {
-  //   updateFormData({ rolesAndResponsibilities, skillsRequired });
-  // }, [rolesAndResponsibilities, skillsRequired, updateFormData]);
+  const [editableKey, setEditableKey] = useState({});
 
   // Handle saving of data
   const save = () => {
     updateFormData({ rolesAndResponsibilities, skillsRequired });
   };
 
-  // Handle the change in responsibilities for existing roles
-  // const handleResponsibilityKeyChange = (oldRole, newRole) => {
-  //   if (newKey === oldKey || !newKey.trim()) return; // Avoid empty or same key
+  const handleResponsibilityKeyChange = (oldRole, newRole) => {
+    if (newRole === oldRole || !newRole.trim()) return; // Avoid empty or same key
 
-  //   setRolesAndResponsibilities((prevRoles) => ({
-  //     ...prevRoles,
-  //     [role]: value, // Update responsibility for the specific role
-  //   }));
-  // };
-// ---------------------
-const handleResponsibilityKeyChange = (oldRole, newRole) => {
-  if (newRole === oldRole || !newRole.trim()) return; // Avoid empty or same key
+    setRolesAndResponsibilities((prevRoles) => {
+      const { [oldRole]: _, ...rest } = prevRoles; // Remove old key
+      return {
+        ...rest,
+        [newRole]: prevRoles[oldRole], // Add new key with the old value
+      };
+    });
+  };
 
-  setSystemRequirements((prevRoles) => {
-    const { [oldRole]: _, ...rest } = prevRoles; // Remove old key
-    return {
-      ...rest,
-      [newRole]: prevSystemRequirements[oldRole], // Add new key with the old value
-    };
-  });
-};
-
-
-  // ----------
   const handleResponsibilityChange = (role, value) => {
     setRolesAndResponsibilities((prevRoles) => ({
       ...prevRoles,
@@ -113,7 +97,9 @@ const handleResponsibilityKeyChange = (oldRole, newRole) => {
           value={newSkill}
           onChange={(e) => setNewSkill(e.target.value)} // Handle changes for new skill input
         />
-        <button className="addButton" onClick={addNewSkill}>Add Skill</button>
+        <button className="addButton" onClick={addNewSkill}>
+          Add Skill
+        </button>
       </div>
       {/* Roles and Responsibilities Section */}
       <h3>Roles and Responsibilities</h3>
@@ -122,9 +108,14 @@ const handleResponsibilityKeyChange = (oldRole, newRole) => {
             <div className="subRole_div" key={role}>
               <textarea
                 placeholder="Role"
-                value={role}
-                onChange={
-                  (e) => handleResponsibilityKeyChange(role, e.target.value) // Handle role change
+                value={
+                  editableKey.hasOwnProperty(role) ? editableKey[role] : role
+                }
+                onChange={(e) =>
+                  setEditableKey((prev) => ({
+                    ...prev,
+                    [role]: e.target.value,
+                  }))
                 }
               />
               <textarea
@@ -134,6 +125,17 @@ const handleResponsibilityKeyChange = (oldRole, newRole) => {
                   (e) => handleResponsibilityChange(role, e.target.value) // Handle responsibility change
                 }
               />
+              {editableKey.hasOwnProperty(role) ? (
+                <button
+                  onClick={() =>
+                    handleResponsibilityKeyChange(role, editableKey[role])
+                  }
+                >
+                  Save
+                </button>
+              ) : (
+                <button type="button">Well</button>
+              )}
             </div>
           ))
         : ""}
@@ -151,10 +153,14 @@ const handleResponsibilityKeyChange = (oldRole, newRole) => {
           value={newResponsibility}
           onChange={handleNewResponsibilityChange} // Handle changes for the new responsibility input
         />
-        <button className="addButton" onClick={addNewRole}>Add Role</button>
+        <button className="addButton" onClick={addNewRole}>
+          Add Role
+        </button>
       </div>
 
-      <button className="saveButton" onClick={save}>Save</button>
+      <button className="saveButton" onClick={save}>
+        Save
+      </button>
     </div>
   );
 }

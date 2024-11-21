@@ -10,7 +10,7 @@
   overflow: scroll;
 }
 .primaryContact_div::-webkit-scrollbar {
-  display: none; /* Hide scrollbar in webkit-based browsers */
+  display: none;
 }
 .subPrimaryContact_div {
   display: flex;

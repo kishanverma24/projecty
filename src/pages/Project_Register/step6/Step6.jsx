@@ -9,10 +9,7 @@ function Step6({ formData, updateFormData }) {
   );
   const [newTechnologyKey, setNewTechnologyKey] = useState(""); // For new key input
   const [newTechnologyValue, setNewTechnologyValue] = useState(""); // For new value input
-
-  useEffect(() => {
-    updateFormData({ technologies });
-  }, [technologies, updateFormData]);
+  const [editableKey, setEditableKey] = useState({});
 
   const save = () => {
     updateFormData({ technologies });
@@ -59,8 +56,13 @@ function Step6({ formData, updateFormData }) {
               {/* Editable Key */}
               <textarea
                 placeholder="Technology Category"
-                value={key}
-                onChange={(e) => handleTechnologyKeyChange(key, e.target.value)} // Handle key change
+                value={editableKey.hasOwnProperty(key) ? editableKey[key] : key}
+                onChange={(e) =>
+                  setEditableKey((prev) => ({
+                    ...prev,
+                    [key]: e.target.value,
+                  }))
+                }
               />
               {/* Editable Value */}
               <textarea
@@ -70,6 +72,17 @@ function Step6({ formData, updateFormData }) {
                   (e) => handleTechnologyValueChange(key, e.target.value) // Handle value change
                 }
               />
+              {editableKey.hasOwnProperty(key) ? (
+                <button
+                  onClick={() =>
+                    handleTechnologyKeyChange(key, editableKey[key])
+                  }
+                >
+                  Save
+                </button>
+              ) : (
+                <button type="button">Well</button>
+              )}
             </div>
           ))
         : ""}
@@ -87,7 +100,9 @@ function Step6({ formData, updateFormData }) {
           value={newTechnologyValue}
           onChange={(e) => setNewTechnologyValue(e.target.value)} // Handle value input
         />
-        <button className="addButton" onClick={addNewTechnology}>Add</button>
+        <button className="addButton" onClick={addNewTechnology}>
+          Add
+        </button>
       </div>
 
       <button className="saveButton" onClick={save}>
