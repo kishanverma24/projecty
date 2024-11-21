@@ -8,7 +8,7 @@ function Step11({ formData, updateFormData }) {
     formData.primaryContact || { name: "", role: "" }
   );
   const [communicationChannels, setCommunicationChannels] = useState(
-    formData.communicationChannels || { email: "", slack: "" }
+    formData.communicationChannels || { email: "", contact: "" }
   );
   const [demoLink, setDemoLink] = useState(formData.demoLink || "");
   const handlePrimaryContactChange = (e) => {
@@ -18,6 +18,13 @@ function Step11({ formData, updateFormData }) {
       [name]: value,
     }));
   };
+  // useEffect(() => {
+  // delete formData.communicationChannels[slack]
+
+  //   return () => {
+
+  //   }
+  // }, [])
 
   // Handle change for communication channels (email, slack)
   const handleCommunicationChannelChange = (e) => {
@@ -57,7 +64,7 @@ function Step11({ formData, updateFormData }) {
       </div>
       <input
         type="text"
-        name="Contact"
+        name="contact"
         placeholder="Contact"
         value={primaryContact.contact}
         onChange={handlePrimaryContactChange}
@@ -66,6 +73,8 @@ function Step11({ formData, updateFormData }) {
       {/* Communication Channels */}
       <h3>Preferred Communication Channels</h3>
       <div className="subPrimaryContact_div">
+        <h3>Email</h3>
+
         <input
           type="text"
           name="email"
@@ -73,11 +82,13 @@ function Step11({ formData, updateFormData }) {
           value={communicationChannels.email}
           onChange={handleCommunicationChannelChange}
         />
+        <h3>Contact no</h3>
+
         <input
           type="text"
-          name="slack"
-          placeholder="Slack Username"
-          value={communicationChannels.slack}
+          name="contact"
+          placeholder="Contact No"
+          value={communicationChannels.contact}
           onChange={handleCommunicationChannelChange}
         />
       </div>
