@@ -30,12 +30,7 @@ function MainForm() {
           technologies: "",
           systemRequirements: "",
           progress: "",
-          collaborationNeeds: "",
           timeline: "",
-          budget: "",
-          fundingStatus: "",
-          contactInfo: "",
-          communicationPlan: "",
         };
   });
 

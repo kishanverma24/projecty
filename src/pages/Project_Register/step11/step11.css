@@ -17,9 +17,12 @@
   gap: 5px;
 }
 
-.subPrimaryContact_div {
+.subPrimaryContact_div input{
   height: 30px;
-  width: 50vw;
+}
+.inputy{
+  height: 30px;
+ 
 }
 
 .saveButton {

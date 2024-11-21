@@ -10,7 +10,7 @@ function Step11({ formData, updateFormData }) {
   const [communicationChannels, setCommunicationChannels] = useState(
     formData.communicationChannels || { email: "", slack: "" }
   );
-
+  const [demoLink, setDemoLink] = useState(formData.demoLink || "");
   const handlePrimaryContactChange = (e) => {
     const { name, value } = e.target;
     setPrimaryContact((prevContact) => ({
@@ -30,7 +30,7 @@ function Step11({ formData, updateFormData }) {
 
   // Save function to update form data
   const save = () => {
-    updateFormData({ primaryContact, communicationChannels });
+    updateFormData({ primaryContact, communicationChannels, demoLink });
   };
 
   return (
@@ -38,7 +38,7 @@ function Step11({ formData, updateFormData }) {
       <h2>Step 11: Contact Information and Communication Plan</h2>
 
       {/* Primary Contact Information */}
-      <h>Primary Contact</h>
+      <h3>Primary Contact</h3>
       <div className="subPrimaryContact_div">
         <input
           type="text"
@@ -55,6 +55,13 @@ function Step11({ formData, updateFormData }) {
           onChange={handlePrimaryContactChange}
         />
       </div>
+      <input
+        type="text"
+        name="Contact"
+        placeholder="Contact"
+        value={primaryContact.contact}
+        onChange={handlePrimaryContactChange}
+      />
 
       {/* Communication Channels */}
       <h3>Preferred Communication Channels</h3>
@@ -72,6 +79,21 @@ function Step11({ formData, updateFormData }) {
           placeholder="Slack Username"
           value={communicationChannels.slack}
           onChange={handleCommunicationChannelChange}
+        />
+      </div>
+      <h3>Visual Demo Presentation link</h3>
+      <div
+        className="subPrimaryContact_div"
+        style={{ justifyContent: "center" }}
+      >
+        <input
+          type="text"
+          name="demo"
+          placeholder="Demo Link"
+          value={demoLink}
+          onChange={(e) => {
+            setDemoLink(e.target.value);
+          }}
         />
       </div>
 
