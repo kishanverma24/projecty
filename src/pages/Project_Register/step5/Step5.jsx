@@ -41,8 +41,8 @@ function Step5({ formData, updateFormData }) {
       ...prevMilestones,
       [newMilestoneKey]: newMilestoneValue,
     }));
-    setNewMilestoneKey(""); // Clear the key input
-    setNewMilestoneValue(""); // Clear the value input
+    setNewMilestoneKey(""); 
+    setNewMilestoneValue(""); 
   };
 
   return (
@@ -51,7 +51,6 @@ function Step5({ formData, updateFormData }) {
       {Object.keys(milestones).length !== 0
         ? Object.keys(milestones).map((key) => (
             <div className="subMilestone_div" key={key}>
-              {/* Editable Key */}
               <textarea
                 placeholder="Milestone Key"
                 value={editableKey.hasOwnProperty(key) ? editableKey[key] : key}
@@ -59,7 +58,6 @@ function Step5({ formData, updateFormData }) {
                   setEditableKey((prev) => ({ ...prev, [key]: e.target.value }))
                 } // Handle key change
               />
-              {/* Editable Value */}
               <textarea
                 placeholder="Milestone Value"
                 value={milestones[key]}

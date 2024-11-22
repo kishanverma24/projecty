@@ -12,11 +12,13 @@ import Step8 from "./step8/Step8";
 import Step9 from "./step9/Step9";
 import Step10 from "./step10/Step10";
 import Step11 from "./step11/Step11";
-
+import Step12 from "./step12/Step12";
+import { Examples } from "../../../Example";
+import Navbar from "./../../components/Navbar";
 function MainForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(() => {
-    const savedData = localStorage.getItem("projectFormData");
+    const savedData = localStorage.getItem("newProjectFormData");
     return savedData
       ? JSON.parse(savedData)
       : {
@@ -37,7 +39,7 @@ function MainForm() {
   const updateFormData = (newData) => {
     const updatedData = { ...formData, ...newData };
     setFormData(updatedData);
-    localStorage.setItem("projectFormData", JSON.stringify(updatedData));
+    localStorage.setItem("newProjectFormData", JSON.stringify(updatedData));
   };
 
   const nextStep = () => setCurrentStep((prev) => prev + 1);
@@ -54,6 +56,13 @@ function MainForm() {
   // };
   const handleSubmit = () => {
     console.log(formData);
+    Examples.push(formData);
+    localStorage.clear("newProjectFormData");
+  };
+  const clearForm = () => {
+    localStorage.clear("newProjectFormData");
+    // Reload the current page
+    window.location.reload();
   };
   const renderStep = () => {
     switch (currentStep) {
@@ -79,32 +88,42 @@ function MainForm() {
         return <Step10 formData={formData} updateFormData={updateFormData} />;
       case 11:
         return <Step11 formData={formData} updateFormData={updateFormData} />;
+      case 12:
+        return <Step12 formData={formData} updateFormData={updateFormData} />;
       default:
         return <Step1 formData={formData} updateFormData={updateFormData} />;
     }
   };
 
   return (
-    <div className="pro_reg_page">
-      <h1 className="main-h1">Project Registration Form</h1>
-      {renderStep()}
-      <div>
-        {currentStep > 1 && (
-          <button className="back-button" onClick={prevStep}>
-            Back
-          </button>
-        )}
-        {currentStep < 11 ? (
-          <button className="next-button" onClick={nextStep}>
-            Next
-          </button>
-        ) : (
-          <button className="next-button" onClick={handleSubmit}>
-            Submit Project
-          </button>
-        )}
+    <>
+      <Navbar />
+      <div className="pro_reg_page">
+        <h3 className="main-h1">Project Registration Form</h3>
+        {renderStep()}
+        <div>
+          {currentStep == 1 && (
+            <button className="back-button" onClick={clearForm}>
+              Clear Form
+            </button>
+          )}
+          {currentStep > 1 && (
+            <button className="back-button" onClick={prevStep}>
+              Back
+            </button>
+          )}
+          {currentStep < 12 ? (
+            <button className="next-button" onClick={nextStep}>
+              Next
+            </button>
+          ) : (
+            <button className="next-button" onClick={handleSubmit}>
+              Submit Project
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

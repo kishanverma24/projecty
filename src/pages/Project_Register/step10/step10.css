@@ -12,11 +12,7 @@
 .projectDuration_div::-webkit-scrollbar {
   display: none; /* Hide scrollbar in webkit-based browsers */
 }
-.title_div {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+
 .subDuration_div {
   display: flex;
   gap: 5px;
@@ -29,6 +25,9 @@
   height: 80px;
   width: 50vw;
 }
+.addButton {
+  cursor: pointer;
+}
 .saveButton {
   height: 30px;
   width: 80%;
@@ -37,7 +36,10 @@
   font-weight: bolder;
   margin: 5px;
   cursor: pointer;
+  background-color: green;
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
-.addButton {
-  cursor: pointer;
+
+.saveButton:active {
+  background-color: darkgreen; 
 }

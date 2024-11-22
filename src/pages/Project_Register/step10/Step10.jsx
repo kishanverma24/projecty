@@ -61,12 +61,15 @@ function Step10({ formData, updateFormData }) {
       <h2>Step 10: Timeline</h2>
 
       {/* Project Duration Section */}
-      <h3>Project Duration</h3>
-      <textarea
-        placeholder="Project Duration (e.g., September 2024 – September 2025)"
-        value={projectDuration}
-        onChange={(e) => setProjectDuration(e.target.value)}
-      />
+      <div>
+        <h3>Project Duration</h3>
+        <textarea
+          className="txtr"
+          placeholder="Project Duration (e.g., September 2024 – September 2025)"
+          value={projectDuration}
+          onChange={(e) => setProjectDuration(e.target.value)}
+        />
+      </div>
 
       {/* Key Dates Section */}
       <h3>Key Dates</h3>
@@ -117,7 +120,7 @@ function Step10({ formData, updateFormData }) {
           value={newKeyDateValue}
           onChange={handleNewKeyDateValueChange} // Handle changes for the new value input
         />
-        <button className="addbutton" onClick={addNewKeyDate}>
+        <button className="addButton" onClick={addNewKeyDate}>
           Add Key Date
         </button>{" "}
         {/* Button to add new key date */}

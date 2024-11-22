@@ -1,0 +1,20 @@
+.moto_Div {
+  height: 80px;
+  /* width: 100vw; */
+  background-color: thistle;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.moto_Div h4 {
+  margin: 0px;
+  padding: 0px;
+}
+.moto_Div p {
+  margin: 0px;
+  margin-left: 20vw;
+}

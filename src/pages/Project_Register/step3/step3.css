@@ -10,7 +10,7 @@
   overflow: scroll;
 }
 .scope_div::-webkit-scrollbar {
-  display: none; /* Hide scrollbar in webkit-based browsers */
+  display: none;
 }
 
 .scope_div textarea {

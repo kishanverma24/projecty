@@ -1,4 +1,4 @@
-// Step12.js (Improved Contact Information and Communication Plan Component)
+// Step11.js 
 import React, { useState, useEffect } from "react";
 import "./step11.css";
 
@@ -18,15 +18,7 @@ function Step11({ formData, updateFormData }) {
       [name]: value,
     }));
   };
-  // useEffect(() => {
-  // delete formData.communicationChannels[slack]
 
-  //   return () => {
-
-  //   }
-  // }, [])
-
-  // Handle change for communication channels (email, slack)
   const handleCommunicationChannelChange = (e) => {
     const { name, value } = e.target;
     setCommunicationChannels((prevChannels) => ({
@@ -107,7 +99,6 @@ function Step11({ formData, updateFormData }) {
           }}
         />
       </div>
-
       {/* Save Button */}
       <button className="saveButton" onClick={save}>
         Save

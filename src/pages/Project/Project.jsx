@@ -25,8 +25,18 @@ const Project = () => {
   } = Project;
 
   return (
-    <div className="project">
+    <div className="project" style={{ margin: "10px" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "5px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <h1>{title}</h1>
+        <p>by Kishan Verma</p>
+      </div>
       <div>
         <h2>
           <u>1.Project Title and Overview</u>
@@ -90,7 +100,7 @@ const Project = () => {
               style={{ display: "flex", gap: "5px", alignItems: "center" }}
             >
               <p style={{ margin: 0 }}>
-                <b>*{technology}:</b>
+                <b>{technology}:</b>
               </p>
               <p style={{ margin: 0 }}>{technologies[technology]}</p>{" "}
             </li>
@@ -108,7 +118,7 @@ const Project = () => {
               style={{ display: "flex", gap: "5px", alignItems: "center" }}
             >
               <p style={{ margin: 0 }}>
-                <b>*{systemRequirement}:</b>
+                <b>{systemRequirement}:</b>
               </p>
               <p style={{ margin: 0 }}>
                 {systemRequirements[systemRequirement]}
@@ -148,7 +158,7 @@ const Project = () => {
               style={{ display: "flex", gap: "5px", alignItems: "center" }}
             >
               <p style={{ margin: 0 }}>
-                <b>*{rR}:</b>
+                <b>{rR}:</b>
               </p>
               <p style={{ margin: 0 }}>{rolesAndResponsibilities[rR]}</p>{" "}
             </li>
@@ -169,7 +179,7 @@ const Project = () => {
               style={{ display: "flex", gap: "5px", alignItems: "center" }}
             >
               <p style={{ margin: 0 }}>
-                <b>*{keyDate}:</b>
+                <b>{keyDate}:</b>
               </p>
               <p style={{ margin: 0 }}>{keyDates[keyDate]}</p>{" "}
             </li>
@@ -199,7 +209,7 @@ const Project = () => {
                 style={{ display: "flex", gap: "5px", alignItems: "center" }}
               >
                 <p style={{ margin: 0 }}>
-                  <b>*{communicationChannel.toUpperCase()}:</b>
+                  <b>{communicationChannel}:</b>
                 </p>
                 <p style={{ margin: 0 }}>
                   {communicationChannels[communicationChannel]}

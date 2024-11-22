@@ -9,24 +9,24 @@ function Step8({ formData, updateFormData }) {
   const [progress, setProgress] = useState(
     Array.isArray(formData.progress) ? formData.progress : []
   );
-  const [newProgress, setNewProgress] = useState(""); // State for the new deliverable input
+  const [newProgress, setNewProgress] = useState(""); 
 
   const save = () => {
     updateFormData({ developmentStage, progress });
   };
   const handleProgressChange = (index, value) => {
     const newProgress = [...progress];
-    newProgress[index] = value; // Update the specific index
-    setProgress(newProgress); // Set the updated array
+    newProgress[index] = value; 
+    setProgress(newProgress); 
   };
 
   const handleNewProgressChange = (e) => {
-    setNewProgress(e.target.value); // Update the state for the new deliverable input
+    setNewProgress(e.target.value); 
   };
 
   const addNewProgress = () => {
-    if (newProgress.trim() === "") return; // Don't add empty deliverables
-    setProgress([...progress, newProgress]); // Add the new deliverable
+    if (newProgress.trim() === "") return; 
+    setProgress([...progress, newProgress]); 
     setNewProgress(""); // Clear the input field
   };
 
@@ -54,14 +54,13 @@ function Step8({ formData, updateFormData }) {
       <div className="addbutton_div">
         <textarea
           placeholder="Add New Progress"
-          value={newProgress} // Bind to new deliverable state
-          onChange={handleNewProgressChange} // Handle changes for the new input
+          value={newProgress} 
+          onChange={handleNewProgressChange} 
         />
         <button className="addButton" onClick={addNewProgress}>
           Add Progress
         </button>{" "}
       </div>
-      {/* Button to add new deliverable */}
       <button className="saveButton" onClick={save}>
         Save
       </button>

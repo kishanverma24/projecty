@@ -1,0 +1,14 @@
+.navbar_div {
+  background-color: green;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+}
+.navbar_div p {
+  cursor: pointer;
+}
+.navbar_div p:hover {
+  background-color: rgb(120, 2, 16);
+}
