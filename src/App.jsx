@@ -7,11 +7,15 @@ import Project from "../src/pages/Project/Project";
 import Projects from "./pages/projects/Projects";
 import Search from "./pages/search/Search";
 import Profile from "./pages/profile/Profile";
+import Login from "./pages/login/Login";
+import SignUp from "./pages/signup/SignUp";
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/project" element={<Project />} />
         <Route path="/search" element={<Search />} />
