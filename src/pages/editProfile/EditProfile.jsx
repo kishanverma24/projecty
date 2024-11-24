@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./editprofile.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { LoginUserContext } from "../../context/LoginUserContext";
 
 const EditProfile = () => {
   const [fullName, setFullName] = useState("");
@@ -10,16 +11,15 @@ const EditProfile = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { loginUser, logout, setLogin } = useContext(LoginUserContext);
+
   const navigate = useNavigate();
 
-  // Get user data from localStorage
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      setFullName(user?.fullName || ""); // Default to empty if not found
-      setResume(user?.resume || "");
-      setLinkedIn(user?.linkedIn || "");
+    if (loginUser) {
+      setFullName(loginUser?.fullName || "");
+      setResume(loginUser?.resume || "");
+      setLinkedIn(loginUser?.linkedIn || "");
     }
   }, []);
 
@@ -38,19 +38,16 @@ const EditProfile = () => {
       return;
     }
 
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
-      setError("User not found in local storage.");
+    if (!loginUser) {
+      setError("User not found.");
       setLoading(false);
       return;
     }
 
-    const user = JSON.parse(storedUser);
-
     try {
       const updatedUser = { fullName, resume, linkedIn };
       const response = await fetch(
-        `http://localhost:8000/api/user/${user._id}`,
+        `http://localhost:8000/api/user/${loginUser._id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -61,29 +58,28 @@ const EditProfile = () => {
         }
       );
 
-      if (!response.success) {
-        const errorData = await response.json();
-        setError(errorData.message || "Failed to update profile.");
+      const data = await response.json();
+      console.log(data);
+
+      if (!data.message == "User updated successfully") {
+        setError(data.message || "Failed to update profile.");
         setLoading(false);
         return;
       }
 
-      const data = await response.json();
-      console.log("API response:", data);
+      if (data.message == "User updated successfully") {
+        // console.log(data.currentUser);
 
-      if (data.success) {
-        localStorage.setItem("user", JSON.stringify(data.currentUser || user));
+        setLogin(data.currentUser); // Update loginUser context
         setSuccess("Profile updated successfully!");
-        
-        // Add delay for localStorage update to reflect
-      } else {
-        setError(data.message || "An error occurred.");
+        setLoading(false);
+        setTimeout(() => {
+          navigate("/profile");
+        }, 2000);
       }
     } catch (err) {
       console.error("Error updating profile:", err);
       setError("An error occurred. Please try again later.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -115,7 +111,7 @@ const EditProfile = () => {
           <button onClick={handleUpdate} disabled={loading}>
             {loading ? "Submitting..." : "Submit"}
           </button>
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-message">{`Kverror, ${error}`}</p>}
         </div>
       </div>
     </>

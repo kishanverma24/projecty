@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./../../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
+import { LoginUserContext } from "../../context/LoginUserContext";
 
 const Profile = () => {
-  const [loginUser, setLoginUser] = useState(null);
   const [loginUserProjects, setLoginUserProjects] = useState([]);
   const navigate = useNavigate();
+  const { loginUser, logout, setLogin } = useContext(LoginUserContext);
 
-  // Fetch user from localStorage and redirect if not found
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user && user !== "null") {
-      setLoginUser(JSON.parse(user));
-    } else {
-      navigate("/login"); // Redirect to login if user is not found
+    if (!(loginUser && loginUser !== "null")) {
+      navigate("/login");
     }
-  }, [navigate,]);
+  }, [loginUser, navigate]);
 
-  // Fetch user's projects
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const user = localStorage.getItem("user");
-        const username = JSON.parse(user).userName;
-
         const response = await fetch(
-          `http://localhost:8000/api/project/projects/profileprojects/${username}`,
+          `http://localhost:8000/api/project/projects/profileprojects/${loginUser.userName}`,
           {
             method: "GET",
             credentials: "include",
@@ -51,9 +44,8 @@ const Profile = () => {
     };
 
     fetchProjects();
-  }, []); // Runs when loginUser is set
+  }, []);
 
-  // Logout handler
   const handleLogout = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/auth/logout", {
@@ -66,7 +58,7 @@ const Profile = () => {
 
       const data = await response.json();
       if (data.success) {
-        localStorage.removeItem("user");
+        logout();
         navigate("/");
       } else {
         console.error("Logout failed:", data.message);
@@ -76,7 +68,6 @@ const Profile = () => {
     }
   };
 
-  // Render loading state
   if (!loginUser) {
     return <p>Loading...</p>;
   }

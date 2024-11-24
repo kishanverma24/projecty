@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import Navbar from "../../components/Navbar";
+import { LoginUserContext } from "../../context/LoginUserContext";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null); // State for error messages
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { loginUser, logout, setLogin } = useContext(LoginUserContext);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      navigate("/"); // Redirect logged-in users to home
+    if (loginUser) {
+      navigate("/");
     }
-  }, [navigate]);
+  }, [loginUser, navigate]);
 
   const handleLogin = async () => {
     if (!userName || !password) {
@@ -33,19 +34,17 @@ const Login = () => {
       const data = await response.json();
 
       if (!data.success) {
-        setError("Invalid username or password.");
+        setError(data.message || "Invalid username or password.");
         setUserName("");
         setPassword("");
         return;
       }
-      // console.log(data.user);
 
-      // Store only necessary data
-      localStorage.setItem("user", JSON.stringify(data.user));
+      setLogin(data.user);
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
-      setError("An error occurred. Please try again later.");
+      setError(error.message || "An error occurred. Please try again later.");
     }
   };
 
