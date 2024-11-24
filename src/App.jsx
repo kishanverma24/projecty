@@ -9,6 +9,7 @@ import Search from "./pages/search/Search";
 import Profile from "./pages/profile/Profile";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
+import SearchProfile from "./pages/searchedProfile/SearchProfile";
 export default function App() {
   return (
     <BrowserRouter>
@@ -17,9 +18,10 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/project" element={<Project />} />
+        <Route path="/project/:projectid" element={<Project />} />
         <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/search/profile/:username" element={<SearchProfile />} />
         <Route path="/projectr" element={<Project_Register_Form />} />
       </Routes>
     </BrowserRouter>

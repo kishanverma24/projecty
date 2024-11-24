@@ -1,7 +1,7 @@
 export const Examples = [
   // Project 1: Smart Home Energy Management System (SHEMS)
   {
-    id: "1",
+    _id: "1",
     title: "Smart Home Energy Management System (SHEMS)",
     overview:
       "The Smart Home Energy Management System (SHEMS) aims to optimize energy consumption in residential homes using advanced machine learning algorithms and real-time data analytics. By integrating with smart appliances and sensors, SHEMS will provide homeowners with actionable insights to reduce energy costs and environmental impact.",
@@ -72,7 +72,7 @@ export const Examples = [
 
   // Project 2: AI-powered Personal Finance Tracker
   {
-    id: "2",
+    _id: "2",
     title: "AI-powered Personal Finance Tracker",
     overview:
       "The AI-powered Personal Finance Tracker uses artificial intelligence to analyze and optimize personal financial data. The system helps users track their spending habits, set savings goals, and provides personalized recommendations to improve their financial health.",
@@ -145,7 +145,7 @@ export const Examples = [
 
   // Project 3: E-commerce Platform for Custom Products
   {
-    id: "3",
+    _id: "3",
     title: "E-commerce Platform for Custom Products",
     overview:
       "An online platform where users can design and order custom products like T-shirts, mugs, and phone cases. The platform integrates with manufacturers for on-demand printing and shipping.",
@@ -211,7 +211,7 @@ export const Examples = [
   },
   // Project 4: Virtual Reality Fitness App
   {
-    id: "4",
+    _id: "4",
     title: "Virtual Reality Fitness App",
     overview:
       "A fitness app that integrates with virtual reality (VR) to provide immersive workout experiences. Users can participate in various virtual fitness classes or track their fitness progress in a fully interactive VR environment.",
@@ -284,7 +284,7 @@ export const Examples = [
 
   // Project 5: AI-based Data Prediction System
   {
-    id: "5",
+    _id: "5",
     title: "AI-based Data Prediction System",
     overview:
       "This project focuses on creating an AI-driven system that can predict future trends in data, such as sales forecasts, stock prices, and customer behavior, based on historical data.",
@@ -350,7 +350,7 @@ export const Examples = [
 
   // Project 6: Automated HR Recruitment System
   {
-    id: "6",
+    _id: "6",
     title: "Automated HR Recruitment System",
     overview:
       "An AI-powered recruitment system that automates the screening process of job candidates, analyzing resumes, matching skills with job descriptions, and conducting initial interview rounds using chatbots.",
@@ -415,12 +415,12 @@ export const Examples = [
       contact: "0987654321",
     },
     demoLink: "https://emmaroberts@example.com?demo",
-    tags: ["AI", "HR", "Automation"],
+    tags: ["Artificial Intelligence", "HR", "Automation"],
   },
 
   // Project 7: Blockchain-based Voting System
   {
-    id: "7",
+    _id: "7",
     title: "Blockchain-based Voting System",
     overview:
       "A secure and transparent voting system using blockchain technology to ensure vote integrity, eliminate fraud, and provide real-time vote tracking.",
@@ -486,11 +486,11 @@ export const Examples = [
       contact: "5551234567",
     },
     demoLink: "https://lucasturner@example.com?demo",
-    tags: ["Blockchain", "Voting", "Security"],
+    tags: ["Blockchain", "Voting", "Security", "Artificial Intelligence"],
   },
   // Project 8: Augmented Reality Interior Design App
   {
-    id: "8",
+    _id: "8",
     title: "Augmented Reality Interior Design App",
     overview:
       "An augmented reality (AR) app that allows users to visualize furniture and decor in their own living spaces in real-time. This app aims to revolutionize the interior design process by offering virtual mockups and interactive room planning.",
@@ -558,7 +558,7 @@ export const Examples = [
 
   // Project 9: Cloud-based Collaborative Task Management System
   {
-    id: "9",
+    _id: "9",
     title: "Cloud-based Collaborative Task Management System",
     overview:
       "A cloud-based platform that enables teams to manage tasks, track project progress, and collaborate effectively in real-time. The system integrates chat, file sharing, and task tracking to help improve productivity and streamline communication.",
@@ -628,7 +628,7 @@ export const Examples = [
 
   // Project 10: Autonomous Drone Delivery System
   {
-    id: "10",
+    _id: "10",
     title: "Autonomous Drone Delivery System",
     overview:
       "A system that uses autonomous drones to deliver small packages to customers, reducing delivery times and increasing efficiency for e-commerce businesses.",
@@ -694,6 +694,11 @@ export const Examples = [
       contact: "6543219870",
     },
     demoLink: "https://oliverclark@example.com?demo",
-    tags: ["Drones", "Autonomous Systems", "Logistics"],
+    tags: [
+      "Drones",
+      "Autonomous Systems",
+      "Logistics",
+      "Artificial Intelligence",
+    ],
   },
 ];

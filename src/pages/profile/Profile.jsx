@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./../../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
-import { Examples } from "../../../Example";
 
 const Profile = () => {
   const [loginUser, setLoginUser] = useState(null);
+  const [loginUserProjects, setLoginUserProjects] = useState([]);
   const navigate = useNavigate();
 
+  // Fetch user from localStorage and redirect if not found
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user && user !== "null") {
@@ -16,6 +17,44 @@ const Profile = () => {
     }
   }, [navigate]);
 
+  // Fetch user's projects
+  useEffect(() => {
+    if (!loginUser) return; // Only run if loginUser is available
+    const user = localStorage.getItem("user");
+    const username = JSON.parse(user);
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/api/project/projects/profileprojects/${username.userName}`,
+          {
+            method: "GET",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+
+        if (!data.success) {
+          throw new Error(data.message || `Failed to fetch projects`);
+        }
+
+        if (Array.isArray(data.projects)) {
+          setLoginUserProjects(data.projects);
+        } else {
+          console.error("Unexpected data format:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching projects:", error.message);
+      }
+    };
+
+    fetchProjects();
+  }, []); // Runs when loginUser is set
+
+  // Logout handler
   const handleLogout = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/auth/logout", {
@@ -25,18 +64,22 @@ const Profile = () => {
           "Content-Type": "application/json",
         },
       });
+
       const data = await response.json();
       if (data.success) {
         localStorage.removeItem("user");
         navigate("/");
+      } else {
+        console.error("Logout failed:", data.message);
       }
     } catch (error) {
-      console.error("Logout failed: ", error);
+      console.error("Logout failed: ", error.message);
     }
   };
 
+  // Render loading state
   if (!loginUser) {
-    return <p>Loading...</p>; // Show a loading state while user data is being fetched
+    return <p>Loading...</p>;
   }
 
   return (
@@ -92,7 +135,7 @@ const Profile = () => {
             padding: "5px",
             borderRadius: "2px",
             marginRight: "20px",
-            cursor:"pointer"
+            cursor: "pointer",
           }}
           className="add-project-btn"
         >
@@ -104,7 +147,7 @@ const Profile = () => {
             color: "black",
             height: "30px",
             width: "10%",
-            cursor:"pointer"
+            cursor: "pointer",
           }}
           className="logout-btn"
           onClick={handleLogout}
@@ -119,11 +162,12 @@ const Profile = () => {
           <strong>Projects</strong>
         </p>
         <div>
-          {Examples.map((exampleProject, index) => (
-            <p key={index}>
+          {loginUserProjects.length > 0 ? (
+            loginUserProjects.map((project, index) => (
               <Link
+                key={index}
                 style={{ textDecoration: "none" }}
-                to={`/project/${exampleProject.id}`}
+                to={`/project/${project._id}`}
               >
                 <p
                   style={{
@@ -133,15 +177,18 @@ const Profile = () => {
                     cursor: "pointer",
                     borderRadius: "2px",
                     paddingLeft: "5px",
-                    alignContent: "center",
+                    display: "flex",
+                    alignItems: "center",
                     color: "black",
                   }}
                 >
-                  {exampleProject.title}
+                  {project.title}
                 </p>
               </Link>
-            </p>
-          ))}
+            ))
+          ) : (
+            <p>No projects found.</p>
+          )}
         </div>
       </div>
     </div>

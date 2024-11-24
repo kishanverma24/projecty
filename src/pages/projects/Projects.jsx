@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./../../components/Navbar";
-import { Examples } from "../../../Example.js";
+import { ProjectsContext } from "../../context/ProjectsContext";
 
 const Projects = () => {
+  const { projects } = useContext(ProjectsContext); // Access projects from context
+
   return (
     <>
       <Navbar />
       <div>
-        {/* Dynamically map through the Eg array */}
-        {Examples.map((exampleProject, index) => (
-          <p key={index}>
+        {projects.map((project, index) => (
+          <div key={project._id || index}>
             <Link
               style={{ textDecoration: "none" }}
-              to={`/project/${exampleProject.id}`}
+              to={`/project/${project._id || project.id}`}
             >
-              <p
+              <div
                 style={{
                   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                   height: "30px",
@@ -23,14 +24,15 @@ const Projects = () => {
                   cursor: "pointer",
                   borderRadius: "2px",
                   paddingLeft: "5px",
-                  alignContent: "center",
+                  display: "flex",
+                  alignItems: "center",
                   color: "black",
                 }}
               >
-                {exampleProject.title}
-              </p>
+                {project.title}
+              </div>
             </Link>
-          </p>
+          </div>
         ))}
       </div>
     </>
