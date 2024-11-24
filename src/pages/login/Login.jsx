@@ -38,7 +38,7 @@ const Login = () => {
         setPassword("");
         return;
       }
-      console.log(data.user);
+      // console.log(data.user);
 
       // Store only necessary data
       localStorage.setItem("user", JSON.stringify(data.user));

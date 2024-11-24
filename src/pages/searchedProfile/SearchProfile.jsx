@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { Link, useParams } from "react-router-dom";
-import { Examples } from "../../../Example";
 
 const Profile = () => {
   const [searchUser, setSearchUser] = useState(null);
+  const [searchUserProjects, setSearchUserProjects] = useState([]);
   const [error, setError] = useState(null);
   const { username } = useParams();
-  const [data, setData] = useState();
+
+  // Fetch user details
   useEffect(() => {
     const fetchSearchedUser = async () => {
       try {
@@ -23,31 +24,71 @@ const Profile = () => {
         );
 
         const data = await response.json();
-        console.log(data);
 
         if (!data.success) {
-          console.log("Error occured in the data", data);
+          throw new Error(data.message || "User not found.");
         }
         setSearchUser(data.searchedUser);
-
         setError(null);
       } catch (error) {
-        console.log(error);
-        console.log(data);
-
-        setError("Error while searching user", error.message);
+        console.error("Error fetching user details:", error.message);
+        setError(error.message);
       }
     };
 
     fetchSearchedUser();
   }, [username]);
 
-  if (!searchUser && !error) {
-    return <p>Loading...</p>;
-  }
+  // Fetch user's projects
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/api/project/projects/profileprojects/${username}`,
+          {
+            method: "GET",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(data.message || "Failed to fetch projects.");
+        }
+
+        if (Array.isArray(data.projects)) {
+          setSearchUserProjects(data.projects);
+        } else {
+          console.error("Unexpected data format for projects:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching projects:", error.message);
+      }
+    };
+
+    fetchProjects();
+  }, [username]);
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div>
+        <Navbar />
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (!searchUser) {
+    return (
+      <div>
+        <Navbar />
+        <p>User not found.</p>
+      </div>
+    );
   }
 
   return (
@@ -102,29 +143,33 @@ const Profile = () => {
           <strong>Projects</strong>
         </p>
         <div>
-          {Examples.map((exampleProject, index) => (
-            <p key={index}>
-              <Link
-                style={{ textDecoration: "none" }}
-                to={`/project/${exampleProject.id}`}
-              >
-                <p
-                  style={{
-                    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                    height: "30px",
-                    width: "100%",
-                    cursor: "pointer",
-                    borderRadius: "2px",
-                    paddingLeft: "5px",
-                    alignContent: "center",
-                    color: "black",
-                  }}
+          {searchUserProjects.length > 0 ? (
+            searchUserProjects.map((project) => (
+              <div key={project._id}>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/project/${project._id}`}
                 >
-                  {exampleProject.title}
-                </p>
-              </Link>
-            </p>
-          ))}
+                  <p
+                    style={{
+                      boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                      height: "30px",
+                      width: "100%",
+                      cursor: "pointer",
+                      borderRadius: "2px",
+                      paddingLeft: "5px",
+                      alignContent: "center",
+                      color: "black",
+                    }}
+                  >
+                    {project.title}
+                  </p>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p>No projects found.</p>
+          )}
         </div>
       </div>
     </div>

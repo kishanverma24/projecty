@@ -15,17 +15,17 @@ const Profile = () => {
     } else {
       navigate("/login"); // Redirect to login if user is not found
     }
-  }, [navigate]);
+  }, [navigate,]);
 
   // Fetch user's projects
   useEffect(() => {
-    if (!loginUser) return; // Only run if loginUser is available
-    const user = localStorage.getItem("user");
-    const username = JSON.parse(user);
     const fetchProjects = async () => {
       try {
+        const user = localStorage.getItem("user");
+        const username = JSON.parse(user).userName;
+
         const response = await fetch(
-          `http://localhost:8000/api/project/projects/profileprojects/${username.userName}`,
+          `http://localhost:8000/api/project/projects/profileprojects/${username}`,
           {
             method: "GET",
             credentials: "include",
@@ -35,7 +35,6 @@ const Profile = () => {
           }
         );
         const data = await response.json();
-        console.log(data);
 
         if (!data.success) {
           throw new Error(data.message || `Failed to fetch projects`);
@@ -95,9 +94,7 @@ const Profile = () => {
         <p>
           <strong>Email:</strong> {loginUser.email}
         </p>
-        <p>
-          <strong>Phone:</strong> {loginUser.phone || "N/A"}
-        </p>
+
         <p>
           <strong>LinkedIn:</strong>{" "}
           {loginUser.linkedIn ? (
@@ -140,6 +137,21 @@ const Profile = () => {
           className="add-project-btn"
         >
           Add new Project
+        </Link>
+        <Link
+          to="/editprofile"
+          style={{
+            backgroundColor: "darkblue",
+            textDecoration: "none",
+            color: "white",
+            padding: "5px",
+            borderRadius: "2px",
+            marginRight: "20px",
+            cursor: "pointer",
+          }}
+          className="add-project-btn"
+        >
+          Edit Profile
         </Link>
         <button
           style={{

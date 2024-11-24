@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import axios from "axios";
+import React, { useState } from "react";
 import "./pro_reg.css";
 import Step1 from "./step1/Step1";
 import Step2 from "./step2/Step2";
@@ -13,8 +12,8 @@ import Step9 from "./step9/Step9";
 import Step10 from "./step10/Step10";
 import Step11 from "./step11/Step11";
 import Step12 from "./step12/Step12";
-import { Examples } from "../../../Example";
 import Navbar from "./../../components/Navbar";
+
 function MainForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(() => {
@@ -36,63 +35,91 @@ function MainForm() {
         };
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
   const updateFormData = (newData) => {
     const updatedData = { ...formData, ...newData };
     setFormData(updatedData);
     localStorage.setItem("newProjectFormData", JSON.stringify(updatedData));
   };
 
-  const nextStep = () => setCurrentStep((prev) => prev + 1);
-  const prevStep = () => setCurrentStep((prev) => prev - 1);
+  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 12));
+  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
-  // const handleSubmit = () => {
-  //   axios.post('http://localhost:5000/api/projects', formData)
-  //     .then(response => {
-  //       console.log('Project saved:', response.data);
-  //       localStorage.removeItem('projectFormData'); // Clear localStorage after submission
-  //       alert('Project successfully submitted!');
-  //     })
-  //     .catch(error => console.error('Error saving project:', error));
-  // };
-  const handleSubmit = () => {
-    console.log(formData);
-    Examples.push(formData);
-    localStorage.clear("newProjectFormData");
-  };
-  const clearForm = () => {
-    localStorage.clear("newProjectFormData");
-    // Reload the current page
-    window.location.reload();
-  };
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return <Step1 formData={formData} updateFormData={updateFormData} />;
-      case 2:
-        return <Step2 formData={formData} updateFormData={updateFormData} />;
-      case 3:
-        return <Step3 formData={formData} updateFormData={updateFormData} />;
-      case 4:
-        return <Step4 formData={formData} updateFormData={updateFormData} />;
-      case 5:
-        return <Step5 formData={formData} updateFormData={updateFormData} />;
-      case 6:
-        return <Step6 formData={formData} updateFormData={updateFormData} />;
-      case 7:
-        return <Step7 formData={formData} updateFormData={updateFormData} />;
-      case 8:
-        return <Step8 formData={formData} updateFormData={updateFormData} />;
-      case 9:
-        return <Step9 formData={formData} updateFormData={updateFormData} />;
-      case 10:
-        return <Step10 formData={formData} updateFormData={updateFormData} />;
-      case 11:
-        return <Step11 formData={formData} updateFormData={updateFormData} />;
-      case 12:
-        return <Step12 formData={formData} updateFormData={updateFormData} />;
-      default:
-        return <Step1 formData={formData} updateFormData={updateFormData} />;
+  const handleSubmit = async () => {
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/projects", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+
+      if (!data.success) {
+        setError(data.message || "An error occurred. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      localStorage.removeItem("newProjectFormData");
+      setSuccess("Project successfully submitted! Redirecting...");
+      setTimeout(() => {
+        window.location.href = "/profile";
+      }, 2000);
+    } catch (err) {
+      console.error("Submission error:", err);
+      setError("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const clearForm = () => {
+    localStorage.removeItem("newProjectFormData");
+    setFormData({
+      title: "",
+      overview: "",
+      description: "",
+      objective: "",
+      scope: "",
+      deliverables: "",
+      milestones: "",
+      technologies: "",
+      systemRequirements: "",
+      progress: "",
+      timeline: "",
+    });
+    setCurrentStep(1);
+  };
+
+  const renderStep = () => {
+    const StepComponents = [
+      Step1,
+      Step2,
+      Step3,
+      Step4,
+      Step5,
+      Step6,
+      Step7,
+      Step8,
+      Step9,
+      Step10,
+      Step11,
+      Step12,
+    ];
+    const StepComponent = StepComponents[currentStep - 1];
+    return (
+      <StepComponent formData={formData} updateFormData={updateFormData} />
+    );
   };
 
   return (
@@ -100,9 +127,14 @@ function MainForm() {
       <Navbar />
       <div className="pro_reg_page">
         <h3 className="main-h1">Project Registration Form</h3>
+        {loading && <p>Submitting...</p>}
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="success-message">{success}</p>}
+
         {renderStep()}
+
         <div>
-          {currentStep == 1 && (
+          {currentStep === 1 && (
             <button className="back-button" onClick={clearForm}>
               Clear Form
             </button>
@@ -117,7 +149,11 @@ function MainForm() {
               Next
             </button>
           ) : (
-            <button className="next-button" onClick={handleSubmit}>
+            <button
+              className="next-button"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
               Submit Project
             </button>
           )}
