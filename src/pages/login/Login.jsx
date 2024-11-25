@@ -23,14 +23,18 @@ const Login = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8000/api/auth/login", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userName, password }),
-      });
+      const response = await fetch(
+        // "http://localhost:8000/api/auth/login",
+        "https://serverprojecty.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userName, password }),
+        }
+      );
       const data = await response.json();
 
       if (!data.success) {

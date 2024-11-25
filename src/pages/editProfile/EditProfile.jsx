@@ -47,7 +47,8 @@ const EditProfile = () => {
     try {
       const updatedUser = { fullName, resume, linkedIn };
       const response = await fetch(
-        `http://localhost:8000/api/user/${loginUser._id}`,
+        // `http://localhost:8000/api/user/${loginUser._id}`,
+        `https://serverprojecty.onrender.com/api/user/${loginUser._id}`,
         {
           method: "PUT",
           credentials: "include",

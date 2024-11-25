@@ -54,14 +54,18 @@ function MainForm() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/api/projects", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        // "http://localhost:8000/api/projects", {
+        "https://serverprojecty.onrender.com/api/projects",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await response.json();
 
       if (!data.success) {

@@ -18,7 +18,8 @@ const Profile = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/project/projects/profileprojects/${loginUser.userName}`,
+          // `http://localhost:8000/api/project/projects/profileprojects/${loginUser.userName}`,
+          `https://serverprojecty.onrender.com/api/project/projects/profileprojects/${loginUser.userName}`,
           {
             method: "GET",
             credentials: "include",
@@ -48,13 +49,17 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        // "http://localhost:8000/api/auth/logout", {
+        "https://serverprojecty.onrender.com/api/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
       if (data.success) {

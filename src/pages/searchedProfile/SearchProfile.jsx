@@ -13,7 +13,8 @@ const Profile = () => {
     const fetchSearchedUser = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/user/profile/${username}`,
+          // `http://localhost:8000/api/user/profile/${username}`,
+          `https://serverprojecty.onrender.com/api/user/profile/${username}`,
           {
             method: "GET",
             credentials: "include",
@@ -44,7 +45,8 @@ const Profile = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/project/projects/profileprojects/${username}`,
+          // `http://localhost:8000/api/project/projects/profileprojects/${username}`,
+          `https://serverprojecty.onrender.com/api/project/projects/profileprojects/${username}`,
           {
             method: "GET",
             credentials: "include",
