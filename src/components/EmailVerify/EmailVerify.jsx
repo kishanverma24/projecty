@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import success from "../../../public/images/success.png";
-import "./emailVerify.css";
+import "./emailverify.css";
 
 const EmailVerify = () => {
   const [validUrl, setValidUrl] = useState(true);
