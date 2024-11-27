@@ -11,6 +11,7 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import SearchProfile from "./pages/searchedProfile/SearchProfile";
 import EditProfile from "./pages/editProfile/EditProfile";
+import EmailVerify from "./components/EmailVerify/EmailVerify";
 export default function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/search/profile/:username" element={<SearchProfile />} />
         <Route path="/projectr" element={<Project_Register_Form />} />
+        <Route path="/user/email/:id/verify/:token" element={<EmailVerify />} />
       </Routes>
     </BrowserRouter>
   );
