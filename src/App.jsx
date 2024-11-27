@@ -11,7 +11,7 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import SearchProfile from "./pages/searchedProfile/SearchProfile";
 import EditProfile from "./pages/editProfile/EditProfile";
-import EmailVerify from "./components/EmailVerify/EmailVerify";
+import EmailVerify from "./components/emailVerify/EmailVerify.jsx";
 export default function App() {
   return (
     <BrowserRouter>

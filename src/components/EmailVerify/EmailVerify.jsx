@@ -11,7 +11,6 @@ const EmailVerify = () => {
     const verifyEmailUrl = async () => {
       try {
         const response = await fetch(
-          // "http://localhost:8000/api/auth/login",
         //   "https://serverprojecty.onrender.com/api/auth/login",
             `https://serverprojecty.onrender.com/api/auth/${param.id}/verify/${param.token}`,
           {
@@ -29,7 +28,6 @@ const EmailVerify = () => {
           setValidUrl(true);
         }
       } catch (error) {
-        // console.log(error);
         setValidUrl(false);
       }
     };
