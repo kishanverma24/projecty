@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import success from "../../../public/images/success.png";
+import successImage from "../../../public/images/success.png"; // renamed import for clarity
 
 const EmailVerify = () => {
-  const [validUrl, setValidUrl] = useState(true);
-  const param = useParams();
+  const [validUrl, setValidUrl] = useState(false); // Start with `false`
+  const [error, setError] = useState(null);
+  const { id, token } = useParams(); // Destructure params for readability
 
   useEffect(() => {
     const verifyEmailUrl = async () => {
       try {
         const response = await fetch(
-          //   "https://serverprojecty.onrender.com/api/auth/login",
-          `https://serverprojecty.onrender.com/api/auth/${param.id}/verify/${param.token}`,
+          `https://serverprojecty.onrender.com/api/auth/${id}/verify/${token}`,
           {
             method: "GET",
             credentials: "include",
@@ -20,57 +20,60 @@ const EmailVerify = () => {
             },
           }
         );
-        const data = await response.json();
 
-        // console.log(data);
+        if (!response.ok) {
+          throw new Error("Verification failed");
+        }
+
+        const data = await response.json();
         if (data.success) {
           setValidUrl(true);
+        } else {
+          setError("Invalid or expired verification link.");
         }
       } catch (error) {
-        setValidUrl(false);
+        setError(error.message || "Something went wrong.");
       }
     };
+
     verifyEmailUrl();
-  }, [param]);
+  }, [id, token]);
 
   return (
-    <>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
       {validUrl ? (
-        <div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
+        <>
           <img
-            src={success}
-            alt="success_img"
-            className="success_img"
-            style={{
-              border: "none",
-              outline: "none",
-              padding: "12px 0",
-              backgroundColor: "#3bb19b",
-              borderRadius: "20px",
-              width: "180px",
-              fontWeight: "bold",
-              fontSize: "14px",
-              cursor: "pointer",
-            }}
+            src={successImage}
+            alt="Success"
+            className="success-image"
+            style={{ width: "180px", borderRadius: "20px" }}
           />
           <h1>Email verified successfully</h1>
           <Link to="/login">
-            <button className="green_btn">Login</button>
+            <button className="green-btn">Login</button>
+          </Link>
+        </>
+      ) : error ? (
+        <div className="error-message">
+          <h1>{error}</h1>
+          <Link to="/">
+            <button className="retry-btn">Go to Home</button>
           </Link>
         </div>
       ) : (
         <h1>404 Not Found</h1>
       )}
-    </>
+    </div>
   );
 };
 
