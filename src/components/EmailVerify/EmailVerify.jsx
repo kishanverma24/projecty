@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import success from "../../../public/images/success.png";
-import "./emailverify.css";
+import "../emailVerify/emailverify.css";
 
 const EmailVerify = () => {
   const [validUrl, setValidUrl] = useState(true);
@@ -11,8 +11,8 @@ const EmailVerify = () => {
     const verifyEmailUrl = async () => {
       try {
         const response = await fetch(
-        //   "https://serverprojecty.onrender.com/api/auth/login",
-            `https://serverprojecty.onrender.com/api/auth/${param.id}/verify/${param.token}`,
+          //   "https://serverprojecty.onrender.com/api/auth/login",
+          `https://serverprojecty.onrender.com/api/auth/${param.id}/verify/${param.token}`,
           {
             method: "GET",
             credentials: "include",
